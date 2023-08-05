@@ -1,0 +1,34 @@
+*{
+    margin: 0!important;
+    padding: 0 !important;
+}
+/* dismissable alert */
+#dalert{
+    text-align: center;
+}
+/*header*/
+/*logo*/
+.logo{
+    height: 100px;
+    width: 100px;
+    margin: 5px 0 5px 10px;
+}
+
+/* navbar */
+.navbar-nav{
+    display: flex;
+    flex-direction: row;
+}
+.nav-item{
+    margin-right:15px;
+}
+.nav-link{
+    color: aliceblue;
+
+}
+.login,.register{
+    background-color: aliceblue;
+    color: black;
+    border-radius: 5%;
+    font-weight: bolder;
+}

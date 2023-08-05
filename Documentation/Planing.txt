@@ -1,5 +1,5 @@
 1. Above navbar a dismissable alert 
-2. nav bar:	1. logo 2. course 3.login 4.register 5. why we .6. cart done for now
+2. nav bar:	1. logo 2. course 3.login 4.register 5. why we .6. cart
 3. log in:	name email mno pswd cpswd remember me.
 4. after navbar:	an image big font intro inspired by apna college and code help
 5. achivements:	how many course selled, our studnts got to famous company inspired: code help, coursera
