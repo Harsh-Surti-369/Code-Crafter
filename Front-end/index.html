@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Animation</title>
+</head>
+<body>
+  <nav>
+    <!-- Your navigation bar content goes here -->
+  </nav>
+
+  <div id="changingText">
+    <p id="displayText"></p>
+  </div>
+
+  <script>
+    const textElement = document.getElementById("displayText");
+    const languages = ["C++", "Java", "JS"];
+    let currentLanguageIndex = 0;
+    let currentCharIndex = 0;
+    let direction = 1;
+
+    function animateText() {
+      const currentLanguage = languages[currentLanguageIndex];
+      let currentText = currentLanguage.substring(0, currentCharIndex);
+      textElement.textContent = currentText;
+
+      if (currentCharIndex === currentLanguage.length) {
+        direction = -1;
+      } else if (currentCharIndex === 0) {
+        direction = 1;
+        currentLanguageIndex = (currentLanguageIndex + 1) % languages.length;
+      }
+
+      currentCharIndex += direction;
+    }
+
+    // Change the text every 100 milliseconds (adjust as needed for the desired animation speed)
+    setInterval(animateText, 100);
+
+    // Call animateText function initially to start the animation
+    animateText();
+  </script>
+</body>
+</html>

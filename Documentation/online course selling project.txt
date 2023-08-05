@@ -1,0 +1,60 @@
+What you will be learn:
+
+creating dynamic website in php from scratch
+object oriented php
+signup / login system
+user management and access
+admin dashboard
+basic security
+messaging system
+rating system 
+video uploading
+content management
+ajax and json
+mysql CRUD
+cart
+payment system
+MVC design pattern
+
+
+requirement in create a online course selling website
+
+html
+basic javaScript
+basic php
+
+
+chapter 2:
+
+
+page required in online couse selling
+
+Home
+signup
+login
+view course by category
+course search
+course full view
+course play page
+course rating
+messaging
+my course(instructor)
+my course(student)
+cart
+wishlist
+checkout
+upload course
+instructor dashboard(sales states)
+profile
+account setting
+instructor public profile
+
+
+admin area to manage users
+
+-all course
+-all users
+-all instrucor
+-course approval
+-manage course promos
+-manage user role
