@@ -16,11 +16,12 @@
   }
   
   .logo {
-    height: 4rem;
-    width: 4rem;
+    height: 4.5rem;
+    width: 4.5rem
   }
-  
-  /* Modified CSS to align navbar items to the left without space between them */
+  .navbar{
+    padding: 10px!important;
+  }
   .navbar-nav {
     display: flex;
     justify-content: flex-start; /* Align items to the left */
@@ -32,23 +33,26 @@
     width: 93px;
 }
   .nav-link {
-    padding: 0.5rem 1rem; /* Add padding to the nav links for space */
-    margin: 1rem .5rem;
+    margin: .5rem .5rem;
     text-align: center;
     font-weight: 600;
     color: rgb(173, 120, 223);
   }
-.nav-link:active,.nav-link:focus, .active{
-    color: antiquewhite;    
-    font-weight: 700;
-}
+  .nav-link:hover,.nav-link:active{
+    font-weight: 600;
+  }
 .cart{
     width: 3rem;
     height: 3rem;
 }
 /* login signup */
 .ls{
-    background-color:rgb(49, 49, 49);
-    color: white;
+    background-color:whitesmoke;
+    color: rgb(173, 120, 223);
     border-radius: 10%;
+}
+.ls:hover{
+  color:rgb(49, 49, 49);
+  background-color: rgb(173, 120, 223);
+  font-weight: 600;
 }
