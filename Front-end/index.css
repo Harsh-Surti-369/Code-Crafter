@@ -1,147 +1,54 @@
-/* /* *{
-    margin: 0!important;
-    padding: 0 !important;
-}
 /* dismissable alert */
-/* #dalert{
+#dalert {
     text-align: center;
-} */
-/*header*/
-/*logo*/
-/* .logo{
-    height: 100px;
-    width: 100px;
-    margin: 5px 0 5px 10px;
-} */
-
-/* navbar */ */
-/* .navbar-nav{
-    display: flex;
-    flex-direction: row;
-}
-.nav-item{
-    margin-right:15px;
-}
-.nav-link{
-    color: aliceblue; */
-
-/* }
-.login,.register{
-    background-color: aliceblue;
-    color: black;
-    border-radius: 5%;
-    font-weight: bolder; */
-/* } */ */
-
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  /* disable alert */
-
-  .disability-alert {
-    /* background-color: #d400ff; Blue color */
-    background-color: #04AA6D;
-    color: #f0e3e3;
-    text-align: center;
-    padding: 10px;
-    position: static;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    font-size: medium;
+    margin-bottom: 0px;
   }
   
-  body {
-    font-family: cursive;
+  /* header */
+  header {
+    margin-top: 0;
   }
   
-  a {
-    text-decoration: none;
+  /* logo */
+  .navbar-brand {
+    margin-left: 3%;
+    margin-right: 0;
   }
   
-  li {
-    list-style: none;
-  }
-
-
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: teal;
-    color: #fff;
-  }
-  
-  .nav-links a {
-    color: #fff;
-  }
-  
-  /* LOGO */
   .logo {
-    font-size: 32px;
-    color: #ffffff;
-  }
-  strong{
-    color: rgb(140, 42, 165);
+    height: 4rem;
+    width: 4rem;
   }
   
-  /* NAVBAR MENU */
-  .menu {
+  /* Modified CSS to align navbar items to the left without space between them */
+  .navbar-nav {
     display: flex;
-    gap: 1em;
-    font-size: 18px;
+    justify-content: flex-start; /* Align items to the left */
+    padding-left: 0; /* Remove default padding to align items properly */
+    margin-left: 60%; /* Add some left margin to align items to the left side of the screen */
+    margin-right: 3vw;
   }
-  
-  .menu li:hover {
-    background-color: #4c9e9e;
-    border-radius: 5px;
-    transition: 0.3s ease;
-  }
-  
-  .menu li {
-    padding: 5px 14px;
-  }
-  
-  /* DROPDOWN MENU */
-  .services {
-    position: relative; 
-  }
-  
-  .dropdown {
-    background-color: rgb(1, 139, 139);
-    padding: 1em 0;
-    position: absolute; /*WITH RESPECT TO PARENT*/
-    display: none;
-    border-radius: 8px;
-    top: 35px;
-  }
-  
-  .dropdown li + li {
-    margin-top: 10px;
-  }
-  
-  .dropdown li {
-    padding: 0.5em 1em;
-    width: 8em;
+.nav-item{
+    width: 93px;
+}
+  .nav-link {
+    padding: 0.5rem 1rem; /* Add padding to the nav links for space */
+    margin: 1rem .5rem;
     text-align: center;
+    font-weight: 600;
+    color: rgb(173, 120, 223);
   }
-  
-  .dropdown li:hover {
-    background-color: #4c9e9e;
-  }
-  
-  .services:hover .dropdown {
-    display: block;
-  }
-
-
-  
-
-
+.nav-link:active,.nav-link:focus, .active{
+    color: antiquewhite;    
+    font-weight: 700;
+}
+.cart{
+    width: 3rem;
+    height: 3rem;
+}
+/* login signup */
+.ls{
+    background-color:rgb(49, 49, 49);
+    color: white;
+    border-radius: 10%;
+}
