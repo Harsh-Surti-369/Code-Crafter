@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,13 +19,13 @@
 <body>
 
   <!-- dismissable alert -->
-  <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
+<!--   <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
     <strong>Unleash your IT potential! Master tech skills with our online courses - Enroll now and embrace success!</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="dalertbtn"></button>
-  </div>
+  </div> -->
   
   <!-- navbar -->
-  <header>
+<!--   <header>
     <nav class="navbar navbar-light bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -45,6 +45,79 @@
       </div>
     </nav>
   </header>
-</body>
+</body> -->
 
-</html>
+<!-- </html> --> -->
+
+
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style1.css" />
+  <title>Document</title>
+</head>
+
+<body>
+<!-- disable alert -->
+<div class="disability-alert" id="disabilityAlert">
+    Unleash your IT potential! Master tech skills with our online courses - Enroll now and embrace success!.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Automatically close the alert after a delay (e.g., 10 seconds)
+    const alertElement = document.getElementById('disabilityAlert');
+    const delay = 10000; // 10 seconds
+    setTimeout(() => {
+      alertElement.remove();
+    }, delay);
+  </script>
+
+
+  <nav class="navbar">
+    <!-- LOGO -->
+    <div class="logo"><strong>Code</strong> craft</div>
+
+    <!-- NAVIGATION MENU -->
+    <ul class="nav-links">
+
+      <!-- USING CHECKBOX HACK -->
+      <!-- <input type="checkbox" id="checkbox_toggle" />
+      <label for="checkbox_toggle" class="hamburger">&#9776;</label> -->
+
+      <!-- NAVIGATION MENUS -->
+      <div class="menu">
+
+        <li><a href="/">Home</a></li>
+        <li><a href="/">About</a></li>
+
+        <li class="services">
+          <a href="/">Course</a>
+
+          <!-- DROPDOWN MENU -->
+          <ul class="dropdown">
+            <li><a href="/">Dropdown 1 </a></li>
+            <li><a href="/">Dropdown 2</a></li>
+            <li><a href="/">Dropdown 2</a></li>
+            <li><a href="/">Dropdown 3</a></li>
+            <li><a href="/">Dropdown 4</a></li>
+          </ul>
+
+        </li>
+
+        <li><a href="/">Contact</a></li>
+        <li><a href="/">Add Cart</a></li>
+      </div>
+    </ul>
+  </nav>
+
+
+
