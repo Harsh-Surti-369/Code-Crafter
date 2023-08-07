@@ -177,3 +177,24 @@ nav {
     transform: scale(1);
   }
 }
+
+/* achievements */
+
+.achievements{
+  text-align: center;
+  height: 171px;
+  width: 1520px;
+}
+.achievements h3{
+  color: rgb(173, 120, 223);
+  margin: 20px 0 40px 0;
+}
+strong{
+  font-weight: 900;
+  color: rgb(62, 62, 162);
+}
+.companies{
+  display: flex;
+  margin: 0 194px;
+  justify-content: space-around;
+}
