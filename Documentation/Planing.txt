@@ -3,7 +3,7 @@
 3. log in:	name email mno pswd cpswd remember me.
 4. after navbar:	an image big font intro inspired by apna college and code help
 5. achivements:	how many course selled, our studnts got to famous company inspired: code help, coursera
-6. student,faculty appreciation
-7. bootstrap card for course intro
+7. student,faculty appreciation
+6. bootstrap card for course intro
 8. social media handles 
 9. footer

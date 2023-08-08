@@ -198,3 +198,20 @@ strong{
   margin: 0 194px;
   justify-content: space-around;
 }
+
+/* courses cards*/
+.coursecontainer{
+  background-color: rgb(251, 240, 240);
+}
+.coursecontainer h2{
+  margin-top: 30px;
+  text-align: center;
+  color: #f7b731;
+  font-weight: 700;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.carousel-card {
+  flex: 0 0 calc(25% - 20px);
+  max-width: calc(25% - 20px);
+  margin: 10px;
+}
