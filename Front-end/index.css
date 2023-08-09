@@ -92,9 +92,10 @@ nav {
 
 /* hero section */
 .hero-section {
-  margin: 0;
+  margin: 0 !important;
   background-image: url('../Assets/images/herobackimg2.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   color: #ffffff;
   padding: 150px 0;
@@ -215,3 +216,5 @@ strong{
   max-width: calc(25% - 20px);
   margin: 10px;
 }
+
+/* apppreciation */
