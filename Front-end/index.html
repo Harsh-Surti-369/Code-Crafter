@@ -7,13 +7,13 @@
   <!-- bootstrap css -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <!-- bootstrap js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
     crossorigin="anonymous"></script>
-  <!-- jquery -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <!-- font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -33,6 +33,7 @@
 
   <!-- header navbar -->
   <header class="sticky-top">
+
     <nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo_for_website-removebg-preview.png"
@@ -59,8 +60,15 @@
             <li class="nav-item cls">
               <a class="nav-link ls">Log in</a>
             </li>
-            <li class="nav-item cls">
-              <a class="nav-link ls">Sign Up</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="signupDropdown" role="button" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Sign Up
+              </a>
+              <div class="dropdown-menu" aria-labelledby="signupDropdown">
+                <a class="dropdown-item" href="#">Sign Up as Student</a>
+                <a class="dropdown-item" href="#">Sign Up as Faculty</a>
+              </div>
             </li>
           </ul>
         </div>
@@ -96,121 +104,131 @@
     </div>
   </div>
 
-  <!-- crads for courses -->
+  <!-- cards for courses -->
   <div class="coursecontainer">
     <h2 class="text-info">Explore our Courses</h2>
     <div class="container mt-5">
       <div class="d-flex flex-wrap justify-content-center">
-        <div id="introCarousel" class="carousel slide" data-bs-ride="false">
+        <div id="introCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
+            <!-- Slide 1 -->
             <div class="carousel-item active">
-              <div class="d-flex flex-wrap justify-content-center">
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+1" class="card-img-top" alt="Image 1" />
-                  <div class="card-body">
-                    <h5 class="card-title">Course Introduction</h5>
-                    <p class="card-text">
-                      Welcome to our exciting course! In this module, you will
-                      learn...
-                    </p>
-                    <p class="card-text"><strong>Price: $99.99</strong></p>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+              <div class="row justify-content-center">
+                <!-- Card 1 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+1" class="card-img-top" alt="Image 3">
+                    <div class="card-body">
+                      <h5 class="card-title">Course Introduction</h5>
+                      <p class="card-text">Welcome to our exciting course! In this module, you will learn...</p>
+                      <p class="card-text"><strong>Price: $99.99</strong></p>
+                      <a href="#" class="btn btn-primary">Learn More</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+2" class="card-img-top" alt="Image 2" />
-                  <div class="card-body">
-                    <h5 class="card-title">Course Introduction 2</h5>
-                    <p class="card-text">
-                      Discover the amazing world of our course!...
-                    </p>
-                    <p class="card-text"><strong>Price: $89.99</strong></p>
-                    <a href="#" class="btn btn-primary">Explore</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 2 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+2" class="card-img-top" alt="Image 3">
+                    <div class="card-body">
+                      <h5 class="card-title">Course Introduction 2</h5>
+                      <p class="card-text">Discover the amazing world of our course!...</p>
+                      <p class="card-text"><strong>Price: $89.99</strong></p>
+                      <a href="#" class="btn btn-primary">Explore</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+3" class="card-img-top" alt="Image 3" />
-                  <div class="card-body">
-                    <h5 class="card-title">Course Introduction 3</h5>
-                    <p class="card-text">
-                      Embark on a journey of learning and growth...
-                    </p>
-                    <p class="card-text"><strong>Price: $79.99</strong></p>
-                    <a href="#" class="btn btn-primary">Start Now</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 3 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+3" class="card-img-top" alt="Image 3">
+                    <div class="card-body">
+                      <h5 class="card-title">Course Introduction 3</h5>
+                      <p class="card-text">Embark on a journey of learning and growth...</p>
+                      <p class="card-text"><strong>Price: $79.99</strong></p>
+                      <a href="#" class="btn btn-primary">Start Now</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+4" class="card-img-top" alt="Image 4" />
-                  <div class="card-body">
-                    <h5 class="card-title">Course Introduction 4</h5>
-                    <p class="card-text">
-                      Ready to dive into an exciting educational journey?...
-                    </p>
-                    <p class="card-text"><strong>Price: $69.99</strong></p>
-                    <a href="#" class="btn btn-primary">Get Started</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 4 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+4" class="card-img-top" alt="Image 4">
+                    <div class="card-body">
+                      <h5 class="card-title">Course Introduction 4</h5>
+                      <p class="card-text">Ready to dive into an exciting educational journey?...</p>
+                      <p class="card-text"><strong>Price: $69.99</strong></p>
+                      <a href="#" class="btn btn-primary">Get Started</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- Add more slides similarly with four cards each -->
             <div class="carousel-item">
-              <div class="d-flex flex-wrap justify-content-center">
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+5" class="card-img-top" alt="Image 5" />
-                  <div class="card-body">
-                    <h5 class="card-title">Module 1: Getting Started</h5>
-                    <p class="card-text">
-                      In this module, we'll cover the basics of...
-                    </p>
-                    <p class="card-text"><strong>Price: $49.99</strong></p>
-                    <a href="#" class="btn btn-primary">Start Learning</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+              <div class="row justify-content-center">
+                <!-- Card 5 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+5" class="card-img-top" alt="Image 5">
+                    <div class="card-body">
+                      <h5 class="card-title">IT Course 5</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      <p class="card-text"><strong>Price: $89.99</strong></p>
+                      <a href="#" class="btn btn-primary">Learn More</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+6" class="card-img-top" alt="Image 6" />
-                  <div class="card-body">
-                    <h5 class="card-title">Module 2: Advanced Concepts</h5>
-                    <p class="card-text">Explore the deeper aspects of...</p>
-                    <p class="card-text"><strong>Price: $59.99</strong></p>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 6 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+6" class="card-img-top" alt="Image 6">
+                    <div class="card-body">
+                      <h5 class="card-title">IT Course 6</h5>
+                      <p class="card-text">Vestibulum facilisis bibendum dui, vel vehicula ex blandit vel.</p>
+                      <p class="card-text"><strong>Price: $79.99</strong></p>
+                      <a href="#" class="btn btn-primary">Explore</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+7" class="card-img-top" alt="Image 7" />
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      Module 3: Practical Applications
-                    </h5>
-                    <p class="card-text">
-                      Apply your knowledge to real-world scenarios...
-                    </p>
-                    <p class="card-text"><strong>Price: $79.99</strong></p>
-                    <a href="#" class="btn btn-primary">Apply Now</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 7 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+7" class="card-img-top" alt="Image 7">
+                    <div class="card-body">
+                      <h5 class="card-title">IT Course 7</h5>
+                      <p class="card-text">Aenean dapibus eget nisi sed varius.</p>
+                      <p class="card-text"><strong>Price: $69.99</strong></p>
+                      <a href="#" class="btn btn-primary">Start Now</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
-                <div class="card carousel-card">
-                  <img src="https://via.placeholder.com/150?text=Image+8" class="card-img-top" alt="Image 8" />
-                  <div class="card-body">
-                    <h5 class="card-title">Module 4: Final Project</h5>
-                    <p class="card-text">
-                      Bring together all your skills to complete the final
-                      project...
-                    </p>
-                    <p class="card-text"><strong>Price: $109.99</strong></p>
-                    <a href="#" class="btn btn-primary">Get Creative</a>
-                    <button class="btn btn-success mt-2">Add to Cart</button>
+                <!-- Card 8 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <img src="https://via.placeholder.com/150?text=Image+8" class="card-img-top" alt="Image 8">
+                    <div class="card-body">
+                      <h5 class="card-title">IT Course 8</h5>
+                      <p class="card-text">Praesent eget lorem id erat varius vestibulum.</p>
+                      <p class="card-text"><strong>Price: $59.99</strong></p>
+                      <a href="#" class="btn btn-primary">Get Started</a>
+                      <button class="btn btn-success mt-2">Add to Cart</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Add more carousel items with sets of cards -->
+        
           </div>
+        
+          <!-- Carousel Controls -->
           <button class="carousel-control-prev" type="button" data-bs-target="#introCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -220,38 +238,72 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-      </div>
-    </div>
-  </div>
+  <!-- appreciation   -->
+  <section id="student-reviews" class="py-5">
+                      <div class="container">
+                        <h2 class="text-center mb-4">Student Reviews</h2>
+                        <div id="studentCarousel" class="carousel slide" data-bs-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                  <div class="review-card text-center">
+                                    <img src="https://via.placeholder.com/150" alt="Student 1"
+                                      class="student-img rounded-circle mb-3">
+                                    <h4 class="mt-3">Rajesh Sharma</h4>
+                                    <p>"Code-Crafter has been an amazing learning experience for me. The instructors are
+                                      knowledgeable and supportive, and the hands-on projects have boosted my coding skills
+                                      immensely."</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                  <div class="review-card text-center">
+                                    <img src="https://via.placeholder.com/150" alt="Student 2"
+                                      class="student-img rounded-circle mb-3">
+                                    <h4 class="mt-3">Priya Patel</h4>
+                                    <p>"I can't believe how much I've learned in such a short time with Code-Crafter. The
+                                      interactive lessons and real-world examples have made complex concepts easy to grasp. Highly
+                                      recommended!"</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="carousel-item">
+                              <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                  <div class="review-card text-center">
+                                    <img src="https://via.placeholder.com/150" alt="Student 3"
+                                      class="student-img rounded-circle mb-3">
+                                    <h4 class="mt-3">Amita Reddy</h4>
+                                    <p>"As a complete beginner, I was worried about diving into coding. But Code-Crafter's
+                                      step-by-step approach and supportive community made me feel confident and excited about my
+                                      coding journey."</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Add more carousel items for additional students' reviews -->
+                            <!-- ... (more carousel items) ... -->
+                          </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#studentCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#studentCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                        </div>
+                      </div>
+  </section>
 
-  <!--appreciation  -->
-  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active w-40">
-        <img src="../Assets/images/imperial.png" class="d-block" alt="...">
-        <h3>mr.hello</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, dicta vero? Ratione nam cum accusamus id laboriosam dolor magni at.</p>
-      </div>
-      <div class="carousel-item w-40">
-        <img src="../Assets/images/penn.png" class="d-block" alt="...">
-        <h3>mr.hello</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, dicta vero? Ratione nam cum accusamus id laboriosam dolor magni at.</p>
-      </div>
-      <div class="carousel-item w-40">
-        <img src="../Assets/images/illinois-3.png" class="d-block" alt="...">
-        <h3>mr.hello</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, dicta vero? Ratione nam cum accusamus id laboriosam dolor magni at.</p>
-      </div>
-    </div>
-    <button class="carousel-control-prev btn-primary" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next btn-primary" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+
 </body>
 
 </html>

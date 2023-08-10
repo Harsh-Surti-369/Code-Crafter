@@ -1,3 +1,7 @@
+body {
+  background-color: whitesmoke;
+  color: rgb(49, 49, 49);
+}
 /* dismissable alert */
 #dalert {
   text-align: center;
@@ -154,67 +158,96 @@ nav {
   color: rgb(173, 120, 223);
 }
 
-/* Animations */
-@keyframes sloganBounce {
-
-  0%,
-  100% {
-    transform: translateY(-10px);
-  }
-
-  50% {
-    transform: translateY(10px);
-  }
-}
-
-@keyframes headingScale {
-
-  0%,
-  100% {
-    transform: scale(0.9);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-}
-
 /* achievements */
 
-.achievements{
+.achievements {
   text-align: center;
   height: 171px;
   width: 1520px;
 }
-.achievements h3{
+
+.achievements h3 {
   color: rgb(173, 120, 223);
   margin: 20px 0 40px 0;
 }
-strong{
+
+strong {
   font-weight: 900;
   color: rgb(62, 62, 162);
 }
-.companies{
+
+.companies {
   display: flex;
   margin: 0 194px;
   justify-content: space-around;
 }
 
 /* courses cards*/
-.coursecontainer{
+.coursecontainer {
   background-color: rgb(251, 240, 240);
 }
-.coursecontainer h2{
+
+.coursecontainer h2 {
   margin-top: 30px;
   text-align: center;
   color: #f7b731;
   font-weight: 700;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
 .carousel-card {
   flex: 0 0 calc(25% - 20px);
   max-width: calc(25% - 20px);
   margin: 10px;
 }
 
+@media (max-width: 576px) {
+  .carousel-card {
+    flex: 0 0 calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+}
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px; /* Adjust the width as needed */
+  height: 50px; /* Adjust the height as needed */
+  top: 50%; /* Vertically center the buttons */
+  transform: translateY(-50%); /* Adjust position */
+}
+
+.carousel-control-prev {
+  left: -30px; /* Adjust horizontal position for previous button */
+}
+
+.carousel-control-next {
+  right: -30px; /* Adjust horizontal position for next button */
+}
+
+
 /* apppreciation */
+#student-reviews {
+  background-color: rgb(242, 242, 242);
+  padding: 50px 0;
+}
+.carousel-inner {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.student-img {
+  width: 150px;
+  height: 150px;
+}
+.review-card {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgb(200, 200, 200);
+  margin: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
