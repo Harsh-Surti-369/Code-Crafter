@@ -24,7 +24,7 @@ header {
   width: 4.5rem
 }
 
-nav {
+.navbar {
   margin-bottom: 0 !important;
 }
 
@@ -250,4 +250,9 @@ strong {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1);
+}
+
+/* footer */
+.social-icons a:hover {
+  color: #007bff; /* Change to your desired hover color */
 }
