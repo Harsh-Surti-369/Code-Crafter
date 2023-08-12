@@ -5,5 +5,8 @@
 5. achivements:	how many course selled, our studnts got to famous company inspired: code help, coursera
 7. student,faculty appreciation
 6. bootstrap card for course intro
-8. social media handles 
-9. footer
+8. social media handles
+9. blogs
+10. inquiry form
+11. upcoming events
+12. footer
