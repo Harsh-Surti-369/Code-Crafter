@@ -90,3 +90,16 @@ header {
     color: #007bff; /* Change to your desired hover color */
   }
   
+
+
+  /* Media queries for responsiveness */
+/* Small screens (up to 576px) */
+@media (max-width: 576px) {
+  /* Navbar adjustments */
+  .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar-toggler {
+    margin: 0;
+  }
+}

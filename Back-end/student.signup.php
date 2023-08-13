@@ -1,19 +1,9 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))  {
 
-$server = "localhost";
-$user = "root";
-$password = "";
-$db = "practice";
+    require 'dbconnect.php';
 
-// Establish a connection to the database
-$con = mysqli_connect($server, $user, $password, $db);
-
-// Check if the form has been submitted
-if (isset($_POST['submit'])) {
-    // Retrieve form data
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $mname = $_POST['mname'];
@@ -22,33 +12,15 @@ if (isset($_POST['submit'])) {
     $pincode = $_POST['pincode'];
     $email = $_POST['email'];
 
-    if ($con) {
-        // SQL query with placeholders
-        $query = "INSERT INTO `student` (`fname`, `lname`, `mname`, `faname`, `dob`, `pincode`, `email`)
-                  VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        // Prepare the query using the database connection
-        $stmt = mysqli_prepare($con, $query);
-
-        // Bind the values to the placeholders
-        mysqli_stmt_bind_param($stmt, "sssssss", $fname, $lname, $mname, $faname, $dob, $pincode, $email);
-
-        // Execute the prepared statement
-        if (mysqli_stmt_execute($stmt)) {
-            echo "<h1>Now you are our student</h1>";
-            // Display a success message if the insertion is successful
-        } else {
-            echo "<h3>Technical issue, please try again</h3>";
-            // Display an error message if the insertion fails
+    $enterdata = mysqli_query($mysqli,"INSERT INTO `student` (, `fname`, `lname`, `mname`, `faname`, `dob`, `pincode`, `email`)
+     VALUES($fname, $lname, $mname, $faname, $dob, $pincode, $email)");
+        if ($enterdata) {}
+        else{
+          echo "Sigup failed";
         }
-
-        // Close the prepared statement
-        mysqli_stmt_close($stmt);
-    } else {
-        echo "<h3>Technical issue, please try again</h3>";
-        // Display an error message if the database connection fails
-    }
-}
+      
+  }
+  echo "Query Errors";
 ?>
 
 
@@ -123,80 +95,111 @@ if (isset($_POST['submit'])) {
       </div>
     </nav>
   </header>
-
   <section class="h-100 bg-dark">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col">
-          <div class="card card-registration my-4">
-            <div class="row g-0">
-              <div class="col-xl-6 d-none d-xl-block">
-                <img src="../Assets/images/studentimages/studnetform1.webp" alt="Sample photo" class="img-fluid"
-                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
-              </div>
-              <div class="col-xl-6">
-                <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase">Student registration form</h3>
-
-                  <form action="student.signup.php" method="post">
-                    <div class="row">
-                    <div class="col-md-6 mb-4">
+  <div class="h-100 container py-5">
+    <div class="row align-items-center d-flex h-100 justify-content-center">
+      <div class="col">
+        <div class="card card-registration my-4">
+          <div class="row g-0">
+            <div class="col-xl-6 d-none d-xl-block">
+              <img
+                alt="Sample photo"
+                class="img-fluid"
+                src="../Assets/images/studentimages/studnetform1.webp"
+                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem"
+              />
+            </div>
+            <div class="col-xl-6">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">Student registration form</h3>
+                <form action="student.signup.php" method="post">
+                  <div class="row">
+                    <div class="mb-4 col-md-6">
                       <div class="form-outline">
-                        <input name="fname" type="text" id="form3Example1m" class="form-control form-control-lg" />
+                        <input
+                          class="form-control form-control-lg"
+                          id="form3Example1m"
+                          name="fname"
+                          type="text"
+                        />
                         <label class="form-label" for="form3Example1m">First name</label>
                       </div>
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="mb-4 col-md-6">
                       <div class="form-outline">
-                        <input name="lname" type="text" id="form3Example1n" class="form-control form-control-lg" />
+                        <input
+                          class="form-control form-control-lg"
+                          id="form3Example1n"
+                          name="lname"
+                          type="text"
+                        />
                         <label class="form-label" for="form3Example1n">Last name</label>
                       </div>
                     </div>
                   </div>
-
                   <div class="row">
-                    <div class="col-md-6 mb-4">
+                    <div class="mb-4 col-md-6">
                       <div class="form-outline">
-                        <input name="mname" type="text" id="form3Example1m1" class="form-control form-control-lg" />
+                        <input
+                          class="form-control form-control-lg"
+                          id="form3Example1m1"
+                          name="mname"
+                          type="text"
+                        />
                         <label class="form-label" for="form3Example1m1">Mother's name</label>
                       </div>
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="mb-4 col-md-6">
                       <div class="form-outline">
-                        <input name="faname" type="text" id="form3Example1n1" class="form-control form-control-lg" />
+                        <input
+                          class="form-control form-control-lg"
+                          id="form3Example1n1"
+                          name="faname"
+                          type="text"
+                        />
                         <label class="form-label" for="form3Example1n1">Father's name</label>
                       </div>
                     </div>
                   </div>
-
                   <div class="form-outline mb-4">
-                    <input name="dob" type="text" id="form3Example9" class="form-control form-control-lg" />
+                    <input
+                      class="form-control form-control-lg"
+                      id="form3Example9"
+                      name="dob"
+                      type="date"
+                    />
                     <label class="form-label" for="form3Example9">DOB</label>
                   </div>
-
                   <div class="form-outline mb-4">
-                    <input name="pincode" type="text" id="form3Example90" class="form-control form-control-lg" />
+                    <input
+                      class="form-control form-control-lg"
+                      id="form3Example90"
+                      name="pincode"
+                      type="number"
+                    />
                     <label class="form-label" for="form3Example90">Pincode</label>
                   </div>
-
                   <div class="form-outline mb-4">
-                    <input name="email" type="text" id="form3Example97" class="form-control form-control-lg" />
+                    <input
+                      class="form-control form-control-lg"
+                      id="form3Example97"
+                      name="email"
+                      type="email"
+                    />
                     <label class="form-label" for="form3Example97">Email ID</label>
                   </div>
-
-                  <div class="d-flex justify-content-end pt-3">
-                    <button type="button" class="btn btn-light btn-lg">Reset all</button>
-                    <button name="submit" type="button" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                  <div class="justify-content-end d-flex pt-3">
+                    <button class="btn btn-lg btn-info" type="submit">Submit</button>
                   </div>
-                  </form>
-                </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- footer -->
   <footer class="bg-light">

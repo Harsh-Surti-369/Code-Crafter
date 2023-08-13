@@ -54,7 +54,6 @@ body {
   margin-bottom: 30px;
   animation: headingScale 4s ease-in-out infinite alternate;
   color: #ffffff;
-  /* Keep white text color */
 }
 
 .cta-button {
@@ -73,12 +72,33 @@ body {
   color: rgb(173, 120, 223);
 }
 
-/* achievements */
+@media (max-width: 576px) {
+  .hero-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .hero-heading {
+    font-size: 24px;
+  }
+}
 
+/* Medium screens (577px - 991px) */
+@media (min-width: 577px) and (max-width: 991px) {
+  .hero-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  .hero-heading {
+    font-size: 30px;
+  }
+}
+
+/* achievements */
 .achievements {
   text-align: center;
-  height: 171px;
-  width: 1520px;
+  margin: 40px auto;
+  padding: 0 20px;
+  max-width: 1200px; /* Adjust as needed */
 }
 
 .achievements h3 {
@@ -93,13 +113,33 @@ strong {
 
 .companies {
   display: flex;
-  margin: 0 194px;
   justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
-/* courses cards*/
+.companies a {
+  margin: 10px;
+}
+
+/* Media queries for responsiveness */
+/* Small screens (up to 576px) */
+@media (max-width: 576px) {
+  .companies {
+    justify-content: center;
+    margin: 20px 10px;
+  }
+
+  .companies a {
+    margin: 10px;
+  }
+}
+
+
+/* courses cards */
 .coursecontainer {
   background-color: rgb(251, 240, 240);
+  padding: 20px 0;
 }
 
 .coursecontainer h2 {
@@ -107,7 +147,6 @@ strong {
   text-align: center;
   color: #f7b731;
   font-weight: 700;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .carousel-card {
@@ -118,42 +157,31 @@ strong {
 
 @media (max-width: 576px) {
   .carousel-card {
-    flex: 0 0 calc(100% - 20px);
-    max-width: calc(100% - 20px);
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
   }
 }
-.carousel-control-prev,
-.carousel-control-next {
-  width: 50px; /* Adjust the width as needed */
-  height: 50px; /* Adjust the height as needed */
-  top: 50%; /* Vertically center the buttons */
-  transform: translateY(-50%); /* Adjust position */
-}
 
-.carousel-control-prev {
-  left: -30px; /* Adjust horizontal position for previous button */
-}
-
-.carousel-control-next {
-  right: -30px; /* Adjust horizontal position for next button */
-}
-
-
-/* apppreciation */
+/* appreciation */
 #student-reviews {
   background-color: rgb(242, 242, 242);
-  padding: 50px 0;
+  padding: 20px 0;
 }
+
 .carousel-inner {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
+
 .student-img {
   width: 150px;
   height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
 }
+
 .review-card {
   padding: 20px;
   border-radius: 10px;
