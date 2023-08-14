@@ -1,26 +1,37 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))  {
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
 
-    require 'dbconnect.php';
+  require 'dbconnect.php';
 
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $mname = $_POST['mname'];
-    $faname = $_POST['faname'];
-    $dob = $_POST['dob'];
-    $pincode = $_POST['pincode'];
-    $email = $_POST['email'];
+  $fname = $_POST['fname'];
+  $lname = $_POST['lname'];
+  $mname = $_POST['mname'];
+  $faname = $_POST['faname'];
+  $dob = $_POST['dob'];
+  $pincode = $_POST['pincode'];
+  $email = $_POST['email'];
 
-    $enterdata = mysqli_query($mysqli,"INSERT INTO `student` (, `fname`, `lname`, `mname`, `faname`, `dob`, `pincode`, `email`)
-     VALUES($fname, $lname, $mname, $faname, $dob, $pincode, $email)");
-        if ($enterdata) {}
-        else{
-          echo "Sigup failed";
-        }
-      
+  // Use prepared statements to prevent SQL injection
+  $query = "INSERT INTO `student` (`fname`, `lname`, `mname`, `faname`, `dob`, `pincode`, `email`)
+            VALUES(?, ?, ?, ?, ?, ?, ?)";
+  
+  $stmt = $mysqli->prepare($query);
+  $stmt->bind_param("sssssss", $fname, $lname, $mname, $faname, $dob, $pincode, $email);
+  
+  if ($stmt->execute()) {
+      echo "Data inserted successfully.";
+  } else {
+      echo "Signup failed.";
   }
-  echo "Query Errors";
+
+  $stmt->close();
+  $mysqli->close();
+} elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
+  // Form was submitted but encountered errors
+  echo "Form submission encountered errors.";
+} else {}
+
 ?>
 
 
@@ -66,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))  {
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="index.html">Home</a>
+              <a class="nav-link" href="../front-end/index.html">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">My Course</a>
@@ -81,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit']))  {
               <a class="nav-link ls">Log in</a>
             </li>
             <li class="nav-item dropdown cls">
-              <a class="nav-link dropdown-toggle ls" href="#" id="signupDropdown" role="button"
+              <a class="nav-link dropdown-toggle ls active" href="#" id="signupDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Sign Up
               </a>
