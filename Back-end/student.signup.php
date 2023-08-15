@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
               <a class="nav-link" href="#">My Course</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Why We</a>
+              <a class="nav-link" href="../Front-end/whyus.php">Why We</a>
             </li>
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
