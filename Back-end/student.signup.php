@@ -1,36 +1,30 @@
 <?php
+session_start();
+require 'dbconnect.php';
 
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-  require 'dbconnect.php';
-
-  $fname = $_POST['fname'];
-  $lname = $_POST['lname'];
-  $mname = $_POST['mname'];
-  $faname = $_POST['faname'];
-  $dob = $_POST['dob'];
-  $pincode = $_POST['pincode'];
-  $email = $_POST['email'];
+  $sname = $_POST['sname'];
+  $semail = $_POST['semail'];
+  $pswd = $_POST['pswd'];
+  $cpswd = $_POST['cpswd'];
 
   // Use prepared statements to prevent SQL injection
-  $query = "INSERT INTO `student` (`fname`, `lname`, `mname`, `faname`, `dob`, `pincode`, `email`)
-            VALUES(?, ?, ?, ?, ?, ?, ?)";
 
-  $stmt = $mysqli->prepare($query);
-  $stmt->bind_param("sssssss", $fname, $lname, $mname, $faname, $dob, $pincode, $email);
+  $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $sname, $semail, $pswd, $cpswd);
 
   if ($stmt->execute()) {
-    echo "Data inserted successfully.";
-  } else {
-    echo "Signup failed.";
+    echo "Success";
+  } 
+  else {
+    echo "Problem in execution of query";
   }
 
   $stmt->close();
-  $mysqli->close();
-} elseif ($_SERVER['REQUEST_METHOD'] === "POST") {
-  // Form was submitted but encountered errors
-  echo "Form submission encountered errors.";
-} else {
+} 
+else{
+    echo "error inForm submission";
 }
 
 ?>
@@ -50,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <!-- font awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon">
   <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css" />
   <link rel="stylesheet" href="../Front-end/CSS/student.signup.css" />
   <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon" />
@@ -98,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
       </div>
     </nav>
   </header>
+
   <!-- <section class="h-100 bg-dark">
     <div class="h-100 container py-5">
       <div class="row align-items-center d-flex h-100 justify-content-center">
@@ -165,77 +161,76 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['submit'])) {
   </section> -->
 
   <section class="vh-100" style="background-color: #eee;">
-  <div class="container h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-lg-12 col-xl-11">
-        <div class="card text-black" style="border-radius: 25px;">
-          <div class="card-body p-md-5">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                <form class="mx-1 mx-md-4">
+                  <form class="mx-1 mx-md-4" action="student.signup.php" method="POST">
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" />
-                      <label class="form-label" for="form3Example1c">Your Name</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input name="sname" type="text" id="form3Example1c" class="form-control" />
+                        <label class="form-label" for="form3Example1c">Your Name</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="email" id="form3Example3c" class="form-control" />
-                      <label class="form-label" for="form3Example3c">Your Email</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input name="semail" type="email" id="form3Example3c" class="form-control" />
+                        <label class="form-label" for="form3Example3c">Your Email</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4c" class="form-control" />
-                      <label class="form-label" for="form3Example4c">Password</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input name="pswd" type="password" id="form3Example4c" class="form-control" />
+                        <label class="form-label" for="form3Example4c">Password</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="password" id="form3Example4cd" class="form-control" />
-                      <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <input name="cpswd" type="password" id="form3Example4cd" class="form-control" />
+                        <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="form-check d-flex justify-content-center mb-5">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                    <label class="form-check-label" for="form2Example3">
-                      I agree all statements in <a href="#!">Terms of service</a>
-                    </label>
-                  </div>
+                    <div class="form-check d-flex justify-content-center mb-5">
+                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                      <label class="form-check-label" for="form2Example3">
+                        I agree all statements in <a href="#!">Terms of service</a>
+                      </label>
+                    </div>
 
-                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="button" class="btn btn-primary btn-lg">Register</button>
-                  </div>
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                    </div>
 
-                </form>
+                  </form>
 
-              </div>
-              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                  class="img-fluid" alt="Sample image">
+                  <img src="../Assets/images/studentimages/studnetform1.webp" class="img-fluid" alt="Sample image">
 
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- footer -->
   <footer class="bg-light">
