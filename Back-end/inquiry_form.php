@@ -1,25 +1,29 @@
 <?php
+session_start();
+include 'dbconnect.php';
 
-include 'db_connect.php';
-
-// Handle update action
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $entry_id = $_POST['entry_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Update data in the database
-    $sql = "UPDATE inquiries SET name='$name', email='$email', message='$message' WHERE id='$entry_id'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Form updated successfully!";
+    // Use prepared statement for inserting data
+    $stmt = $conn->prepare("INSERT INTO inquiries (name, email, message) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $email, $message);
+
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "Form submitted successfully! You will be responded to soon. Thank you for your feedback.";
     } else {
-        echo "Error updating form: " . $conn->error;
+        $_SESSION['message'] = "Error submitting form. Please try again.";
     }
+
+    $stmt->close();
 } else {
-    echo "Invalid request.";
+    $_SESSION['message'] = "Invalid request. Please try again.";
 }
 
 // Close connection
 $conn->close();
+
+header("Location: ../front-end/whyus.php"); // Redirect to whyus.php
 ?>
