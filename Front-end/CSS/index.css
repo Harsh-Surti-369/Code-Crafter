@@ -140,6 +140,8 @@ strong {
 .coursecontainer {
   background-color: rgb(251, 240, 240);
   padding: 20px 0;
+  display:flex;
+  flex-wrap: wrap;
 }
 
 .coursecontainer h2 {
@@ -173,6 +175,8 @@ strong {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .student-img {
@@ -194,3 +198,11 @@ strong {
 .carousel-control-next-icon {
   filter: invert(1);
 }
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+

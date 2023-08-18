@@ -36,54 +36,55 @@ if (isset($_GET['message'])) {
   <!-- custom css js -->
   <link rel="stylesheet" href="CSS/headerfooter.css" />
   <link rel="stylesheet" href="CSS/whyus.css" />
-  <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
   <title>Why Code Crafter</title>
 </head>
 
 <body>
-  <!-- header navbar -->
-  <header class="sticky-top">
+   <!-- header navbar -->
+   <header class="sticky-top">
 
-    <nav class="navbar navbar-expand-lg p-3 bg-light bg-gradient text-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo_for_website-removebg-preview.png" alt="Code-Crafetr" class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
+        alt="Code-Crafetr" class="logo" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">My Course</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="whyus.php">Why We</a>
-            </li>
-            <li class="nav-item cc">
-              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-            </li>
-            <li class="nav-item cls">
-              <a class="nav-link ls">Log in</a>
-            </li>
-
-            <div class="dropstart cls">
-              <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
-                Sign Up
-              </button>
-              <ul class="dropdown-menu">
-                <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                <a class="dropdown-item" href="#">Sign Up as Faculty</a>
-              </ul>
-            </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Course</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="whyus.php">Why We</a>
+        </li>
+        <li class="nav-item cc">
+          <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
+        </li>
+        <li class="nav-item cls">
+          <a class="nav-link ls">Log in</a>
+        </li>
+        <div class="dropdown">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+            Sign Up
+          </button>
+          <ul class="dropdown-menu">
+            <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+            <a class="dropdown-item" href="#">Sign Up as Faculty</a>
+          </ul>
         </div>
-        </ul>
-      </div>
-      </div>
-    </nav>
-  </header>
+    </div>
+    </ul>
+  </div>
+  </div>
+</nav>
+</header>
 
   <!-- intro -->
   <section class="intro-section">
@@ -158,61 +159,61 @@ if (isset($_GET['message'])) {
 
   <!-- inquiry -->
   <section class="contact-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <h2 class="section-title">Contact Us</h2>
-                    <p class="section-description">
-                        Have questions, feedback, or inquiries? Feel free to reach out using the form below. We'd love to hear from you!
-                    </p>
-                    <form action="../back-end/inquiry_form.php" method="post">
-                       <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h2 class="section-title">Contact Us</h2>
+          <p class="section-description">
+            Have questions, feedback, or inquiries? Feel free to reach out using the form below. We'd love to hear from you!
+          </p>
+          <form action="../back-end/inquiry_form.php" method="post">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" required>
             </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
-    </section>
-
-    <!-- Alert container -->
-    <div id="message-container" class="alert alert-dismissible fade" role="alert" style="display: none;">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        <span id="message-text"></span>
+      </div>
     </div>
+  </section>
 
-    <script>
-      const messageContainer = document.getElementById('message-container');
-      const messageText = document.getElementById('message-text');
+  <!-- Alert container -->
+  <div id="message-container" class="alert alert-dismissible fade" role="alert" style="display: none;">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <span id="message-text"></span>
+  </div>
 
-      const sessionMessage = '<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>';
+  <script>
+    const messageContainer = document.getElementById('message-container');
+    const messageText = document.getElementById('message-text');
 
-      if (sessionMessage) {
-        messageText.textContent = sessionMessage;
-        messageContainer.style.display = 'block';
+    const sessionMessage = '<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>';
 
-        if (sessionMessage.includes('successfully')) {
-            messageContainer.classList.add('alert-success');
-        } else {
-            messageContainer.classList.add('alert-danger');
-        }
+    if (sessionMessage) {
+      messageText.textContent = sessionMessage;
+      messageContainer.style.display = 'block';
 
-        // Automatically hide the alert after 5 seconds (5000 milliseconds)
-        setTimeout(function() {
-            messageContainer.style.display = 'none';
-        }, 5000); // Adjust the time (in milliseconds) as needed
+      if (sessionMessage.includes('successfully')) {
+        messageContainer.classList.add('alert-success');
+      } else {
+        messageContainer.classList.add('alert-danger');
       }
-    </script>
+
+      // Automatically hide the alert after 5 seconds (5000 milliseconds)
+      setTimeout(function() {
+        messageContainer.style.display = 'none';
+      }, 5000); // Adjust the time (in milliseconds) as needed
+    }
+  </script>
 
   <footer class="bg-light">
     <div class="container py-5">
@@ -232,7 +233,7 @@ if (isset($_GET['message'])) {
         </div>
         <div class="col-md-4">
           <div class="d-flex flex-column align-items-center">
-            <img src="../Assets/images/logo_for_website-removebg-preview.png" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
+            <img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
             <h3 class="mb-4">Contact Us</h3>
             <p>Email: info@code-crafter.com</p>
             <p>Phone: +123-456-7890</p>

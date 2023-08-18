@@ -1,94 +1,93 @@
 /* header */
-  
-  /* logo */
-  .navbar-brand {
-    margin-left: 3%;
-    margin-right: 0;
-  }
-  
-  .logo {
-    height: 4.5rem;
-    width: 4.5rem
-  }
-  
-  .navbar {
-    margin-bottom: 0 !important;
-  }
-  
-  /* .navbar{
-      padding: 10px!important;
-    } */
-  .navbar-nav {
-    display: flex !important;
-    justify-content: flex-start;
-    /* Align items to the left */
-    align-items: center;
-    padding-left: 0;
-    /* Remove default padding to align items properly */
-    margin-left: 60%;
-    /* Add some left margin to align items to the left side of the screen */
-    margin-right: 3vw;
-  }
-  
-  .nav-item {
-    width: 100px;
-  }
-  
-  .nav-link {
-    margin: 3px;
-    padding: 3px;
-    text-align: center;
-    font-weight: 600;
-    color: rgb(173, 120, 223);
-  }
-  
-  .nav-link:hover{
-    font-weight: 600;
-  }
-  
-  /* cart container */
-  .cc {
-    margin-right: .5rem;
-    width: 3rem;
-  }
-  
-  .cart {
-    padding: 0%;
-    margin: 0%;
-    width: 2rem;
-    height: 2rem;
-  }
-  
-  /* login signup */
-  .ls {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0;
-    margin: 0;
-    height: 3rem;
-    width: 5rem;
-    background-color: whitesmoke;
-    color: rgb(173, 120, 223);
-    border-radius: 10%;
-  
-  
-  }
-  
-  .ls:hover {
-    color: rgb(49, 49, 49);
-    background-color: rgb(173, 120, 223);
-    font-weight: 600;
-  }
-  
+header {
+  background-color: rgb(100, 98, 96);
+}
+
+/* logo */
+.navbar-brand {
+  margin-left: 3%;
+  margin-right: 0;
+}
+
+.logo {
+  height: 4.5rem;
+  width: 4.5rem;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+.navbar-nav {
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 0;
+  margin-left: 3%; /* Adjust as needed */
+  margin-right: 3vw;
+  width: 100vw;
+  flex-wrap: nowrap; /* Prevent wrapping of items */
+}
+
+.nav-item {
+  width: auto; /* Allow items to adjust width */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.nav-link {
+  margin: 3px;
+  padding: 3px;
+  text-align: center;
+  font-weight: 600;
+  color: rgb(173, 120, 223);
+}
+
+.nav-link:hover {
+  font-weight: 600;
+}
+
+/* cart container */
+.cc {
+  margin-right: 0.5rem;
+  width: 3rem;
+}
+
+.cart {
+  padding: 0%;
+  margin: 0%;
+  width: 2rem;
+  height: 2rem;
+}
+
+/* login signup */
+.ls {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+  height: 3rem;
+  width: 5rem;
+  background-color: whitesmoke;
+  color: rgb(173, 120, 223);
+  border-radius: 10%;
+}
+
+.ls:hover {
+  color: rgb(49, 49, 49);
+  background-color: rgb(173, 120, 223);
+  font-weight: 600;
+}
+
 
   
 /* footer */
+footer{
+  background-color: burlywood;
+}
 .social-icons a:hover {
     color: #007bff; /* Change to your desired hover color */
   }
   
-
-
   /* Media queries for responsiveness */
 /* Small screens (up to 576px) */
 @media (max-width: 576px) {

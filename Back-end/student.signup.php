@@ -1,35 +1,6 @@
 <?php
 session_start();
-require 'dbconnect.php';
-
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-  $sname = $_POST['sname'];
-  $semail = $_POST['semail'];
-  $pswd = $_POST['pswd'];
-  $cpswd = $_POST['cpswd'];
-
-  // Use prepared statements to prevent SQL injection
-
-  $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $sname, $semail, $pswd, $cpswd);
-
-  if ($stmt->execute()) {
-    echo "Success";
-  } 
-  else {
-    echo "Problem in execution of query";
-  }
-
-  $stmt->close();
-} 
-else{
-    echo "error inForm submission";
-}
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,31 +18,30 @@ else{
   <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon">
   <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css" />
   <link rel="stylesheet" href="../Front-end/CSS/student.signup.css" />
-  <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
   <title>Sign up to Code-crafter</title>
 </head>
 
 <body>
   <!-- header navbar -->
   <header class="sticky-top">
-
     <nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo_for_website-removebg-preview.png" alt="Code-Crafetr" class="logo" /></a>
+        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="../front-end/index.html">Home</a>
+              <a class="nav-link active" href="../Front-end/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">My Course</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../Front-end/whyus.php">Why We</a>
+              <a class="nav-link" href="whyus.php">Why We</a>
             </li>
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
@@ -79,17 +49,18 @@ else{
             <li class="nav-item cls">
               <a class="nav-link ls">Log in</a>
             </li>
-            <li class="nav-item dropdown cls">
-              <a class="nav-link dropdown-toggle ls active" href="#" id="signupDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown">
+              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                 Sign Up
-              </a>
-              <div class="dropdown-menu" aria-labelledby="signupDropdown">
-                <a class="dropdown-item" href="#">Sign Up as Student</a>
+              </button>
+              <ul class="dropdown-menu">
+                <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
                 <a class="dropdown-item" href="#">Sign Up as Faculty</a>
-              </div>
-            </li>
-          </ul>
+              </ul>
+            </div>
         </div>
+        </ul>
+      </div>
       </div>
     </nav>
   </header>
@@ -160,14 +131,14 @@ else{
     </div>
   </section> -->
 
-  <section class="vh-100" style="background-color: #eee;">
+  <section class="h-100" style="background-color: #eee;">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black" style="border-radius: 25px;">
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 form">
 
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
@@ -176,7 +147,7 @@ else{
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="sname" type="text" id="form3Example1c" class="form-control" />
+                        <input name="sname" type="text" id="form3Example1c" class="form-control" required />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
@@ -184,7 +155,7 @@ else{
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="semail" type="email" id="form3Example3c" class="form-control" />
+                        <input name="semail" type="email" id="form3Example3c" class="form-control" required />
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
@@ -192,7 +163,7 @@ else{
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="pswd" type="password" id="form3Example4c" class="form-control" />
+                        <input name="pswd" type="password" id="form3Example4c" class="form-control" required />
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
@@ -200,13 +171,13 @@ else{
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="cpswd" type="password" id="form3Example4cd" class="form-control" />
+                        <input name="cpswd" type="password" id="form3Example4cd" class="form-control" required />
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
 
                     <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>
@@ -251,7 +222,7 @@ else{
         </div>
         <div class="col-md-4">
           <div class="d-flex flex-column align-items-center">
-            <img src="../Assets/images/logo_for_website-removebg-preview.png" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
+            <img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
             <h3 class="mb-4">Contact Us</h3>
             <p>Email: info@code-crafter.com</p>
             <p>Phone: +123-456-7890</p>
@@ -272,3 +243,33 @@ else{
 </body>
 
 </html>
+<?php
+require 'dbconnect.php';
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+  $sname = $_POST['sname'];
+  $semail = $_POST['semail'];
+  $pswd = $_POST['pswd'];
+  $cpswd = $_POST['cpswd'];
+
+  // Use prepared statements to prevent SQL injection
+
+  $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $sname, $semail, $pswd, $cpswd);
+
+  if ($stmt->execute()) {
+    echo "Success";
+  } else {
+    echo "Problem in execution of query";
+  }
+
+  $stmt->close();
+} else {
+  echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' id='dalert'>
+        Try again after some Time
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' id='dalertbtn'></button>
+        </div>";
+}
+
+?>
