@@ -1,12 +1,8 @@
-/* header */
-header {
-  background-color: rgb(100, 98, 96);
-}
 
 /* logo */
 .navbar-brand {
-  margin-left: 3%;
-  margin-right: 0;
+  float: left;
+  margin-right: 10px;
 }
 
 .logo {
@@ -17,15 +13,13 @@ header {
 .navbar {
   margin-bottom: 0 !important;
 }
-
 .navbar-nav {
   display: flex !important;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
-  padding-left: 0;
-  margin-left: 3%; /* Adjust as needed */
-  margin-right: 3vw;
-  width: 100vw;
+  float: right;
+  margin-left: 10px;
+  width: auto;
   flex-wrap: nowrap; /* Prevent wrapping of items */
 }
 
@@ -78,8 +72,6 @@ header {
   font-weight: 600;
 }
 
-
-  
 /* footer */
 footer{
   background-color: burlywood;

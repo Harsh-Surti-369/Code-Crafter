@@ -41,50 +41,48 @@ if (isset($_GET['message'])) {
 </head>
 
 <body>
-   <!-- header navbar -->
-   <header class="sticky-top">
 
-<nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
-        alt="Code-Crafetr" class="logo" /></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- header navbar -->
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="index.html">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">My Course</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="whyus.php">Why We</a>
-        </li>
-        <li class="nav-item cc">
-          <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-        </li>
-        <li class="nav-item cls">
-          <a class="nav-link ls">Log in</a>
-        </li>
-        <div class="dropdown">
-          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-            Sign Up
-          </button>
-          <ul class="dropdown-menu">
-            <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-            <a class="dropdown-item" href="#">Sign Up as Faculty</a>
-          </ul>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../Front-end/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">My Course</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="whyus.php">Why We</a>
+            </li>
+            <li class="nav-item cc">
+              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
+            </li>
+            <li class="nav-item cls">
+              <a class="nav-link ls">Log in</a>
+            </li>
+            <div class="dropstart">
+              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                Sign Up
+              </button>
+              <ul class="dropdown-menu">
+                <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                <a class="dropdown-item" href="#">Sign Up as Faculty</a>
+              </ul>
+            </div>
         </div>
-    </div>
-    </ul>
-  </div>
-  </div>
-</nav>
-</header>
+        </ul>
+      </div>
+      </div>
+    </nav>
+  </header>
 
   <!-- intro -->
   <section class="intro-section">

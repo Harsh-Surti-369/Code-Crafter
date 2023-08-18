@@ -32,10 +32,10 @@ session_start();
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="../Front-end/">Home</a>
+              <a class="nav-link" href="../Front-end/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">My Course</a>
@@ -49,7 +49,7 @@ session_start();
             <li class="nav-item cls">
               <a class="nav-link ls">Log in</a>
             </li>
-            <div class="dropdown">
+            <div class="dropstart">
               <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                 Sign Up
               </button>
@@ -65,85 +65,17 @@ session_start();
     </nav>
   </header>
 
-  <!-- <section class="h-100 bg-dark">
-    <div class="h-100 container py-5">
-      <div class="row align-items-center d-flex h-100 justify-content-center">
-        <div class="col">
-          <div class="card card-registration my-4">
-            <div class="row g-0">
-              <div class="col-xl-6 d-none d-xl-block">
-                <img alt="Sample photo" class="img-fluid" src="../Assets/images/studentimages/studnetform1.webp" style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem" />
-              </div>
-              <div class="col-xl-6">
-                <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase">Student registration form</h3>
-                  <form action="student.signup.php" method="post">
-                    <div class="row">
-                      <div class="mb-4 col-md-6">
-                        <div class="form-outline">
-                          <input class="form-control form-control-lg" id="form3Example1m" name="fname" type="text" />
-                          <label class="form-label" for="form3Example1m">First name</label>
-                        </div>
-                      </div>
-                      <div class="mb-4 col-md-6">
-                        <div class="form-outline">
-                          <input class="form-control form-control-lg" id="form3Example1n" name="lname" type="text" />
-                          <label class="form-label" for="form3Example1n">Last name</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="mb-4 col-md-6">
-                        <div class="form-outline">
-                          <input class="form-control form-control-lg" id="form3Example1m1" name="mname" type="text" />
-                          <label class="form-label" for="form3Example1m1">Mother's name</label>
-                        </div>
-                      </div>
-                      <div class="mb-4 col-md-6">
-                        <div class="form-outline">
-                          <input class="form-control form-control-lg" id="form3Example1n1" name="faname" type="text" />
-                          <label class="form-label" for="form3Example1n1">Father's name</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-outline mb-4">
-                      <input class="form-control form-control-lg" id="form3Example9" name="dob" type="date" />
-                      <label class="form-label" for="form3Example9">DOB</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                      <input class="form-control form-control-lg" id="form3Example90" name="pincode" type="number" />
-                      <label class="form-label" for="form3Example90">Pincode</label>
-                    </div>
-                    <div class="form-outline mb-4">
-                      <input class="form-control form-control-lg" id="form3Example97" name="email" type="email" />
-                      <label class="form-label" for="form3Example97">Email ID</label>
-                    </div>
-                    <div class="justify-content-end d-flex pt-3">
-                      <button class="btn btn-lg btn-info" type="submit">Submit</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
-  <section class="h-100" style="background-color: #eee;">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-12 col-xl-11">
-          <div class="card text-black" style="border-radius: 25px;">
+  <section class="h-100 bg-dark w-100">
+    <div class="container h-100 w-100">
+      <div class="row d-flex justify-content-center align-items-center h-100 w-100">
+        <div class="col-lg-12 col-xl-11 mt-4 mb-5 w-100">
+          <div class="card text-black" style="border-radius: 3%;">
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
-                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 form">
-
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 d-flex align-items-center form">
                   <form class="mx-1 mx-md-4" action="student.signup.php" method="POST">
-
+                  <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Sign up</p>
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
@@ -192,7 +124,7 @@ session_start();
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                  <img src="../Assets/images/studentimages/studnetform1.webp" class="img-fluid" alt="Sample image">
+                  <img src="../Assets/images/studentimages/studnetform1.jpg" class="img-fluid" alt="Sample image">
 
                 </div>
               </div>
