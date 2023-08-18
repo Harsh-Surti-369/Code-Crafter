@@ -68,13 +68,13 @@ if (isset($_GET['message'])) {
             <li class="nav-item cls">
               <a class="nav-link ls">Log in</a>
             </li>
-            <div class="dropstart">
-              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+            <div class="dropstart cls">
+              <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
                 Sign Up
               </button>
               <ul class="dropdown-menu">
                 <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                <a class="dropdown-item" href="#">Sign Up as Faculty</a>
+                <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
               </ul>
             </div>
         </div>
