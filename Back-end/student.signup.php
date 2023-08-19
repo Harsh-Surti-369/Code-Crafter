@@ -35,13 +35,13 @@ session_start();
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="../Front-end/">Home</a>
+              <a class="nav-link" href="../Front-end/index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Course</a>
+              <a class="nav-link" href="#">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="whyus.php">Why We</a>
+              <a class="nav-link" href="../Front-end/whyus.php">Why We</a>
             </li>
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
@@ -49,13 +49,13 @@ session_start();
             <li class="nav-item cls">
               <a class="nav-link ls">Log in</a>
             </li>
-            <div class="dropstart">
-              <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+            <div class="dropstart cls">
+              <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
                 Sign Up
               </button>
               <ul class="dropdown-menu">
-                <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                <a class="dropdown-item" href="#">Sign Up as Faculty</a>
+                <a class="dropdown-item" href="student.signup.php">Sign Up as Student</a>
+                <a class="dropdown-item" href="teacher.signup.php">Sign Up as Faculty</a>
               </ul>
             </div>
         </div>
@@ -66,7 +66,7 @@ session_start();
   </header>
 
 
-  <section class="h-100 bg-dark w-100">
+  <main class="h-100 bg-dark w-100">
     <div class="container h-100 w-100">
       <div class="row d-flex justify-content-center align-items-center h-100 w-100">
         <div class="col-lg-12 col-xl-11 mt-4 mb-5 w-100">
@@ -133,7 +133,7 @@ session_start();
         </div>
       </div>
     </div>
-  </section>
+  </main>
 
   <!-- footer -->
   <footer class="bg-light">

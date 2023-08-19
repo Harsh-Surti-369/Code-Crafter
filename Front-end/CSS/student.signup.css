@@ -1,7 +1,7 @@
 *{
     width: 100%;
 }
-section{
+main{
     height: 10 rem;
 }
 .card-registration .select-input.form-control[readonly]:not([disabled]) {
