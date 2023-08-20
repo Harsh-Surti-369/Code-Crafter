@@ -1,0 +1,30 @@
+*{
+    font-weight: 500;
+}
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgb(173, 120, 223), #007bff, #c67676);
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+    button{
+        height: 2.5rem;
+    }
+    button:hover{
+        background: linear-gradient(to bottom ,#c67676, #007bff,rgb(173, 120, 223));
+        font-weight: 900;
+    }

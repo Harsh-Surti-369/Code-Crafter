@@ -1,6 +1,33 @@
 <?php
 session_start();
+
+require 'dbconnect.php';
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+  $sname = $_POST['sname'];
+  $semail = $_POST['semail'];
+  $pswd = $_POST['pswd'];
+  $cpswd = $_POST['cpswd'];
+
+
+  // Use prepared statements to prevent SQL injection
+  $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
+  if ($stmt) {
+
+    $stmt->bind_param("ssss", $sname, $semail, $hashedPassword, $cpswd);
+    if ($stmt->execute()) {
+      $_SESSION['successMessage'] = "Successfully registered. Start learning today!";
+    } else {
+      $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
+    }
+  }
+
+  header('Location: ' . $_SERVER['REQUEST_URI']); // Redirect to clear POST data
+  exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +74,7 @@ session_start();
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
             </li>
             <li class="nav-item cls">
-              <a class="nav-link ls">Log in</a>
+              <a class="nav-link ls" href="../Front-end/login.html">Log in</a>
             </li>
             <div class="dropstart cls">
               <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
@@ -65,6 +92,21 @@ session_start();
     </nav>
   </header>
 
+  <?php if (isset($_SESSION['successMessage'])) : ?>
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
+      <strong><?php echo $_SESSION['successMessage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="dalertbtn"></button>
+    </div>
+    <?php unset($_SESSION['successMessage']); ?>
+  <?php endif; ?>
+
+  <?php if (isset($_SESSION['errorMessage'])) : ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="dalert">
+      <strong><?php echo $_SESSION['errorMessage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="dalertbtn"></button>
+    </div>
+    <?php unset($_SESSION['errorMessage']); ?>
+  <?php endif; ?>
 
   <main class="h-100 bg-dark w-100">
     <div class="container h-100 w-100">
@@ -74,51 +116,46 @@ session_start();
             <div class="card-body p-md-5">
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 d-flex align-items-center form">
-                  <form class="mx-1 mx-md-4" action="student.signup.php" method="POST">
-                  <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Sign up</p>
+                  <form id="signupForm" class="mx-1 mx-md-4" action="student.signup.php" method="POST">
+                    <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Sign up</p>
+
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="sname" type="text" id="form3Example1c" class="form-control" required />
+                        <input name="sname" type="text" class="form-control" required />
                         <label class="form-label" for="form3Example1c">Your Name</label>
                       </div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="semail" type="email" id="form3Example3c" class="form-control" required />
+                        <input name="semail" type="email" class="form-control" required />
                         <label class="form-label" for="form3Example3c">Your Email</label>
                       </div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="pswd" type="password" id="form3Example4c" class="form-control" required />
+                        <input name="pswd" type="password" class="form-control" required />
                         <label class="form-label" for="form3Example4c">Password</label>
                       </div>
                     </div>
-
                     <div class="d-flex flex-row align-items-center mb-4">
                       <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
-                        <input name="cpswd" type="password" id="form3Example4cd" class="form-control" required />
+                        <input name="cpswd" type="password" class="form-control" required />
                         <label class="form-label" for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
-
                     <div class="form-check d-flex justify-content-center mb-5">
-                      <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required />
+                      <input class="form-check-input me-2" type="checkbox" value="" name="form2Example3c" required />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in <a href="#!">Terms of service</a>
                       </label>
                     </div>
-
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button type="submit" class="btn btn-primary btn-lg">Register</button>
                     </div>
-
                   </form>
 
                 </div>
@@ -172,36 +209,7 @@ session_start();
     </div>
   </footer>
 
+  <script src="../Front-end/JS/student.signup.js"></script>
 </body>
 
 </html>
-<?php
-require 'dbconnect.php';
-
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-
-  $sname = $_POST['sname'];
-  $semail = $_POST['semail'];
-  $pswd = $_POST['pswd'];
-  $cpswd = $_POST['cpswd'];
-
-  // Use prepared statements to prevent SQL injection
-
-  $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
-  $stmt->bind_param("ssss", $sname, $semail, $pswd, $cpswd);
-
-  if ($stmt->execute()) {
-    echo "Success";
-  } else {
-    echo "Problem in execution of query";
-  }
-
-  $stmt->close();
-} else {
-  echo "<div class='alert alert-danger alert-dismissible fade show' role='alert' id='dalert'>
-        Try again after some Time
-        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close' id='dalertbtn'></button>
-        </div>";
-}
-
-?>

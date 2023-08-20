@@ -66,7 +66,7 @@ if (isset($_GET['message'])) {
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
             </li>
             <li class="nav-item cls">
-              <a class="nav-link ls">Log in</a>
+              <a class="nav-link ls" href="login.html">Log in</a>
             </li>
             <div class="dropstart cls">
               <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">

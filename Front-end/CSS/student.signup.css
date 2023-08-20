@@ -13,3 +13,9 @@ main{
     .card-registration .select-arrow {
     top: 13px;
     }
+
+    .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+    }

@@ -1,46 +1,50 @@
 <?php
 require 'dbconnect.php';
-
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    // Get form data
     $fname = $_POST['fname'];
     $femail = $_POST['femail'];
     $pswd = $_POST['fpswd'];
-    $cv = $_POST['cv'];
     $edu = $_POST['edu'];
     $exp = $_POST['exp'];
 
-    // Handle image upload
+    // Handle image and CV file uploads
     if (isset($_FILES['fimg']) && $_FILES['fimg']['error'] === UPLOAD_ERR_OK) {
-        $image = $_FILES['fimg']['tmp_name'];
-        $imageContent = file_get_contents($image);
+        $fimgFile = $_FILES['fimg']['tmp_name'];
+        $fimgContent = file_get_contents($fimgFile);
     } else {
-        // Handle error, show message or set default image content
-        $imageContent = ""; // Set a default image content here if needed
+        $fimgContent = null; // No image provided
+    }
+
+    if (isset($_FILES['cv']) && $_FILES['cv']['error'] === UPLOAD_ERR_OK) {
+        $cvFile = $_FILES['cv']['tmp_name'];
+        $cvContent = file_get_contents($cvFile);
+    } else {
+        $cvContent = null; // No CV file provided
     }
 
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare("INSERT INTO faculty (fullname, femail, fpswd, fimg, cv, degree, experience) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    
-    if (!$stmt) {
-        $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
-    } else {
-        if ($stmt->bind_param("sssssss", $fname, $femail, $pswd, $imageContent, $cv, $edu, $exp)) {
-            if ($stmt->execute()) {
-                $_SESSION['successMessage'] = "Successfully registered. Start teaching today!";
-            } else {
-                $_SESSION['errorMessage'] = "Registration failed: " . $stmt->error;
-            }            
+
+    if ($stmt) {
+        $stmt->bind_param("ssbssss", $fname, $femail, $pswd, $fimgContent, $cvContent, $edu, $exp);
+        if ($stmt->execute()) {
+            $_SESSION['successMessage'] = "Successfully registered. Start teaching today!";
         } else {
-            $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
+            $_SESSION['errorMessage'] = "Registration failed: " . $stmt->error;
         }
         $stmt->close();
+    } else {
+        $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
     }
+
     header('Location: ' . $_SERVER['REQUEST_URI']); // Redirect to clear POST data
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
                         </li>
                         <li class="nav-item cls">
-                            <a class="nav-link ls">Log in</a>
+                            <a class="nav-link ls" href="../Front-end/login.html">Log in</a>
                         </li>
                         <div class="dropstart">
                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
@@ -121,94 +125,87 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         <?php unset($_SESSION['errorMessage']); ?>
     <?php endif; ?>
 
-    <main class="h-100 bg-dark w-100">
+    <main class="h-100 bg-secondary w-100">
         <div class="container h-100 w-100">
             <div class="row d-flex justify-content-center align-items-center h-100 w-100">
-                <div class="col-lg-12 col-xl-11 mt-4 mb-5 w-100">
+                <div class="col-lg-6 mb-5"> <!-- Column for the form -->
                     <div class="card text-black" style="border-radius: 3%;">
                         <div class="card-body p-md-5">
-                            <div class="row justify-content-center">
-                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 d-flex align-items-center form">
-                                <form class="mx-1 mx-md-4" action="teacher.signup.php" method="POST" enctype="multipart/form-data">
-                                        <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Sign up</p>
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="fname" type="text" id="form3Example1c" class="form-control" required />
-                                                <label class="form-label" for="form3Example1c">Full Name</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="fimg" type="file" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Your Image</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="femail" type="email" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Your Email</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fa-solid fa-key fa-lg pswd"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="fpswd" type="password" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Password</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="cv" type="file" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Upload CV</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <i class="fa-solid fa-graduation-cap fa-lg"></i>
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="edu" type="text" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Highest Educational Degree</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center mb-4">
-                                            <div class="form-outline flex-fill mb-0">
-                                                <input name="exp" type="number" id="form3Example3c" class="form-control" required />
-                                                <label class="form-label" for="form3Example3c">Years of Experience</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-check d-flex justify-content-center mb-5">
-                                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required />
-                                            <label class="form-check-label" for="form2Example3">
-                                                I agree all statements in <a href="#!">Terms of service</a>
-                                            </label>
-                                        </div>
-
-                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="submit" class="btn btn-primary btn-lg">Start Teaching</button>
-                                        </div>
-
-                                    </form>
-
+                            <form class="mx-1 mx-md-4" action="teacher.signup.php" method="POST" enctype="multipart/form-data">
+                                <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-4 mt-4">Sign up</p>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="fname" type="text" id="form3Example1c" class="form-control" required />
+                                        <label class="form-label" for="form3Example1c">Full Name</label>
+                                    </div>
                                 </div>
-                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                                    <img src="../Assets/images/studentimages/studnetform1.jpg" class="img-fluid" alt="Sample image">
-
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="fimg" type="file" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Your Image</label>
+                                    </div>
                                 </div>
-                            </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="femail" type="email" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Your Email</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fa-solid fa-key fa-lg pswd"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="fpswd" type="password" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="cv" type="file" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Upload CV</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <i class="fa-solid fa-graduation-cap fa-lg"></i>
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="edu" type="text" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Highest Educational Degree</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <input name="exp" type="number" id="form3Example3c" class="form-control" required />
+                                        <label class="form-label" for="form3Example3c">Years of Experience</label>
+                                    </div>
+                                </div>
+                                <div class="form-check d-flex justify-content-center mb-5">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" required />
+                                    <label class="form-check-label" for="form2Example3">
+                                        I agree all statements in <a href="#!">Terms of service</a>
+                                    </label>
+                                </div>
+
+                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">Start Teaching</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-6 mb-5"> <!-- Column for the image -->
+                    <img src="../Assets/images/4360109_2300469.jpg" class="img-fluid" alt="Side Image">
                 </div>
             </div>
         </div>
     </main>
+
     <!-- footer -->
     <footer class="bg-light">
         <div class="container py-5">
