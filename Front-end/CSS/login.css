@@ -26,5 +26,5 @@
     }
     button:hover{
         background: linear-gradient(to bottom ,#c67676, #007bff,rgb(173, 120, 223));
-        font-weight: 900;
+        font-weight: 500; 
     }
