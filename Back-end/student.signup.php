@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
   }
 
-  header('Location: ' . $_SERVER['REQUEST_URI']); // Redirect to clear POST data
+  header("Location: login.html"); // Redirect to clear POST data
   exit();
 }
 ?>

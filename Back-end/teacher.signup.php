@@ -1,12 +1,13 @@
 <?php
-require 'dbconnect.php';
 session_start();
+
+require 'dbconnect.php';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // Get form data
     $fname = $_POST['fname'];
     $femail = $_POST['femail'];
-    $pswd = $_POST['fpswd'];
+    $fpswd = $_POST['fpswd'];
     $edu = $_POST['edu'];
     $exp = $_POST['exp'];
 
@@ -25,22 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $cvContent = null; // No CV file provided
     }
 
+    error_log("Password: " . $fpswd); // Check if password is correctly received
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare("INSERT INTO faculty (fullname, femail, fpswd, fimg, cv, degree, experience) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     if ($stmt) {
-        $stmt->bind_param("ssbssss", $fname, $femail, $pswd, $fimgContent, $cvContent, $edu, $exp);
+        $stmt->bind_param("ssbssss", $fname, $femail, $fpswd, $fimgContent, $cvContent, $edu, $exp);
         if ($stmt->execute()) {
             $_SESSION['successMessage'] = "Successfully registered. Start teaching today!";
         } else {
-            $_SESSION['errorMessage'] = "Registration failed: " . $stmt->error;
+            $_SESSION['errorMessage'] = "Registration failed: ";
         }
         $stmt->close();
     } else {
         $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
     }
 
-    header('Location: ' . $_SERVER['REQUEST_URI']); // Redirect to clear POST data
+    header("Location: ../Front-end/login.html"); // Redirect to clear POST data
     exit();
 }
 ?>
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             <a class="nav-link" href="../Front-end/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Courses</a>
+                            <a class="nav-link" href="../Front-end/course.php">Courses</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="whyus.php">Why We</a>
