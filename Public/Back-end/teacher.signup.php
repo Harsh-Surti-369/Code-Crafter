@@ -24,14 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $cvContent = file_get_contents($cvFile);
     } else {
         $cvContent = null; // No CV file provided
-    }
+    } 
 
     error_log("Password: " . $fpswd); // Check if password is correctly received
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare("INSERT INTO faculty (fullname, femail, fpswd, fimg, cv, degree, experience) VALUES (?, ?, ?, ?, ?, ?, ?)");
-
+    // print_r($stmt);
+    // echo $fpswd;
+    // exit();
     if ($stmt) {
-        $stmt->bind_param("ssbssss", $fname, $femail, $fpswd, $fimgContent, $cvContent, $edu, $exp);
+        $stmt->bind_param("sssbsss", $fname, $femail, $fpswd, $fimgContent, $cvContent, $edu, $exp);
         if ($stmt->execute()) {
             $_SESSION['successMessage'] = "Successfully registered. Start teaching today!";
         } else {
@@ -65,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     <link rel="shortcut icon" href="../Assets/images/logo_for_website-removebg-preview.png" type="image/x-icon">
     <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css" />
     <link rel="stylesheet" href="../Front-end/CSS/student.signup.css" />
+    <script src="../Front-end/JS/teacher.signup.js"></script>
     <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
     <title>Sign up to Code-crafter</title>
 </head>
@@ -248,5 +251,4 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     </footer>
 
 </body>
-
 </html>
