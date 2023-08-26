@@ -1,6 +1,9 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #cde3fb;
+    background-color:#e3fafb;
+}
+.alt{
+    background-color: #aeb4f5;
 }
 .course-card {
     background-color: #fff;

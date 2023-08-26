@@ -36,7 +36,7 @@
 
   <!-- header navbar -->
   <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
+    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
             alt="Code-Crafetr" class="logo" /></a>
@@ -59,18 +59,45 @@
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
             </li>
-            <li class="nav-item cls">
-              <a class="nav-link ls" href="login.html">Log in</a>
-            </li>
-            <div class="dropstart cls">
-              <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
-                Sign Up
-              </button>
-              <ul class="dropdown-menu">
-                <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-              </ul>
-            </div>
+            
+            <?php
+              session_start();
+              if ($_SESSION['loggedin'] = true) {
+                echo '<li class="nav-item cls mx-2">
+                      <a class="nav-link ls" href="mycourse.php">My course</a>
+                      </li>';
+                echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="Profile.php">
+                          Profile
+                        </a>
+                      </li>';
+                
+              }
+              elseif($_SESSION['loggedin'] = false){
+                echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.html">Log in</a>
+                      </li>';
+                echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+              }
+              else{
+                echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.html">Log in</a>
+                      </li>';
+                echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+              }
+            ?>
         </div>
         </ul>
       </div>
@@ -85,7 +112,7 @@
         <div class="col-md-6 content-left">
           <h2 class="hero-slogan">Elevate Your IT Skills to New Heights!</h2>
           <h1 class="hero-heading">Become a Code Craftsman</h1>
-          <a href="course.html" class="cta-button btn">Explore Courses</a>
+          <a href="course.php" class="cta-button btn">Explore Courses</a>
         </div>
       </div>
     </div>
@@ -240,6 +267,7 @@
             <span class="visually-hidden">Next</span>
           </button>
   </section>
+
   <!-- appreciation   -->
   <section id="student-reviews" class="py-5">
     <div class="container">

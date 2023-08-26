@@ -119,7 +119,7 @@
         </section>
 
         <!-- Section 2: Most Viewed Courses -->
-        <section class="mb-5">
+        <section class="mb-5 alt">
             <h2>Most Viewed Courses</h2>
             <div class="row">
                 <!-- Course 1 -->
@@ -151,7 +151,7 @@
                 <!-- Course 3 -->
                 <div class="col-md-4">
                   <div class="course-card">
-                      <img src="course_image1.jpg" class="img-fluid mb-3" alt="Course Image">
+                      <img src="../Assets/couse image/c1.jpg" class="img-fluid mb-3" alt="Course Image">
                       <h5 class="card-title">Introduction to Web Development</h5>
                       <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
                       <p class="faculty-name">Faculty: John Doe</p>
@@ -168,7 +168,7 @@
          <section class="mb-5">
             <h2>Best Rated Courses</h2>
             <div class="row">
-            <div class="col-md-4">
+              <div class="col-md-4">
               <div class="course-card">
                   <img src="../Assets/couse image/c3.jpg" class="img-fluid mb-3" alt="Course Image">
                   <h5 class="card-title">Introduction to Web Development</h5>
@@ -179,7 +179,7 @@
                       <a href="#" class="btn btn-secondary">Learn More</a>
                   </div>
               </div>
-          </div>
+            </div>
                 <!-- Course 2 -->
                 <div class="col-md-4">
             <div class="course-card">
@@ -211,7 +211,7 @@
         </section>
 
         <!-- Section 4: Courses Filtered by Faculty -->
-        <section class="mb-5">
+        <section class="mb-5 alt">
             <h2>Courses by Faculty</h2>
             <div class="dropdown mb-3">
               <button class="btn btn-success dropdown-toggle" type="button" id="facultyDropdown" data-bs-toggle="dropdown" aria-expanded="false">

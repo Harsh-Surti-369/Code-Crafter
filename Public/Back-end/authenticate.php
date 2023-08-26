@@ -27,11 +27,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = 'faculty';
 
         // Redirect to the faculty dashboard or other appropriate page
-        header("Location: ../Front-end/whyus.php");
+        header("Location: ../../faculty_module/facultyprofile.php");
         exit();
     } else {
         // No matching account found
-        $login = "../Front-end/login.html";
+        $_SESSION['loggedin'] = false;
+        $login = "../Front-end/index.php";
         header("Location: ". $login);
         exit();
     }  
