@@ -52,13 +52,14 @@
                                             <label class="form-label" for="form2Example22">Password</label>
                                         </div>
 
-                                        <div class="text-center pt-1 mb-5 pb-1">
+                                        <div class="text-center pt-1 mb-3 pb-1">
                                             <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 col-3"
                                                 type="submit" id="loginForm">
                                                 Log in
                                             </button>
                                         </div>
                                     </form>
+                        
                                     <div>Not have an account? </div>
                                     <div class="dropend cls">
                                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">
@@ -69,6 +70,11 @@
                                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                                         </ul>
                                       </div>
+                                      <div class="text-center pt-1 mb-5 pb-1">
+                                        <a  href="home.php">
+                                            Continue as guest
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">

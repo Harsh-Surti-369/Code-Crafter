@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['role'] = 'student';
 
         // Redirect to the student dashboard or explore courses page
-        header("Location: ../Front-end/index.html");
+        header("Location: ../Front-end/home.php");
         exit();
     } elseif ($faculty_result->num_rows == 1) {
         // Set session variables to mark the user as logged in and as a faculty
