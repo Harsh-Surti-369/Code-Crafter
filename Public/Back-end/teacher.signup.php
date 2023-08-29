@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
     }
 
-    header("Location: ../Front-end/login.html"); // Redirect to clear POST data
+    header("Location: ../Front-end/login.php"); // Redirect to clear POST data
     exit();
 }
 ?>

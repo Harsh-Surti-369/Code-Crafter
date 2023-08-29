@@ -4,7 +4,7 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
-    $email = $_POST['email'];
+    $email = $_POST['email'];   
     $message = $_POST['message'];
 
     // Use prepared statement for inserting data

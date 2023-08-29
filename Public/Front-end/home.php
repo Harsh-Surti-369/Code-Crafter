@@ -62,7 +62,7 @@
             
             <?php
               session_start();
-              if ($_SESSION['loggedin'] && $_SESSION['loggedin'] == true) {
+              if ( isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
@@ -73,7 +73,7 @@
                       </li>';
                 
               }
-              elseif($_SESSION['loggedin'] && $_SESSION['loggedin'] == false){
+              elseif( isset($_SESSION['loggedin'])&& $_SESSION['loggedin'] == false){
                 echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.html">Log in</a>
                       </li>';

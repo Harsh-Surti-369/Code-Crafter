@@ -1,3 +1,10 @@
+<?php
+require '../back-end/dbconnect.php';
+
+// Retrieve course information from the database
+$coursesQuery = "SELECT * FROM courses";
+$coursesResult = mysqli_query($conn, $coursesQuery);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,16 +115,20 @@
             <div class="row">
                 <!-- Course 1 -->
                 <div class="col-md-4">
-                  <div class="course-card">
-                      <img src="../Assets/couse image/c2.jpg" class="img-fluid mb-3" alt="Course Image">
-                      <h5 class="card-title">Introduction to Web Development</h5>
-                      <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-                      <p class="faculty-name">Faculty: John Doe</p>
-                      <div class="buttons">
-                          <a href="#" class="btn btn-primary">Buy Now</a>
-                          <a href="#" class="btn btn-secondary">Learn More</a>
-                      </div>
-                  </div>
+                <div class="course-cards-container">
+        <?php while ($course = mysqli_fetch_assoc($coursesResult)) { ?>
+            <div class="course-card">
+                <img src="uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
+                <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                <p class="card-text"><?php echo $course['description']; ?></p>
+                <p class="faculty-name">Faculty: John Doe</p>
+                <div class="buttons">
+                    <a href="#" class="btn btn-primary">Buy Now</a>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
               </div>
                 <!-- Course 2 -->
                 <div class="col-md-4">
