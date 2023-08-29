@@ -198,7 +198,173 @@ strong {
 .carousel-control-next-icon {
   filter: invert(1);
 }
+ /* Custom styles for Student Reviews section */
+ #student-reviews {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+}
+.student-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+  transition: transform 0.3s ease-in-out;
+}
+.student-img:hover {
+  transform: scale(1.1);
+}
+.review-card {
+  padding: 20px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+}
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+  content: '';
+}
+.carousel-inner {
+  text-align: center;
+}
+.carousel-inner img {
+  margin: 0 auto;
+}
+.review-author {
+  font-weight: bold;
+  margin-top: 15px;
+}
+.review-text {
+  margin-top: 10px;
+  font-style: italic;
+}
 
+
+  /* Custom styles for Past Newsletter Highlights section */
+  .past-highlights {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  .past-highlights h2 {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  .highlight-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  .highlight-card:hover {
+    transform: translateY(-5px);
+  }
+  .highlight-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  .highlight-content {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  .highlight-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .highlight-link:hover {
+    text-decoration: underline;
+  }
+ /* Custom styles for Newsletter Signup section */
+ .newsletter-signup {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.newsletter-signup h2 {
+  font-weight: bold;
+  color: #333;
+}
+.newsletter-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.newsletter-button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.newsletter-button:hover {
+  background-color: #0056b3;
+} 
+
+.newsletter-signup {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+.newsletter-signup h2 {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+.newsletter-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.newsletter-button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+.newsletter-button:hover {
+  background-color: #0056b3;
+}
+.icon {
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #007bff;
+}
 
 body {
   font-family: Arial, sans-serif;

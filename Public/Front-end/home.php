@@ -27,6 +27,7 @@
 </head>
 
 <body>
+  
   <!-- dismissable alert -->
   <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
     <strong>Unleash your IT potential! Master tech skills with our online courses -
@@ -106,32 +107,56 @@
   </header>
 
   <!-- herosection -->
-  <div class="hero-section">
-    <div class="container">
-      <div class="row hero-content">
-        <div class="col-md-6 content-left">
-          <h2 class="hero-slogan">Elevate Your IT Skills to New Heights!</h2>
-          <h1 class="hero-heading">Become a Code Craftsman</h1>
-          <a href="course.php" class="cta-button btn">Explore Courses</a>
-        </div>
+<section class="hero-section">
+  <div class="container">
+    <div class="row hero-content">
+      <div class="col-md-6 content-left">
+        <h2 class="hero-slogan">Elevate Your IT Skills to New Heights</h2>
+        <h1 class="hero-heading">Become a Code Craftsman</h1>
+        <a href="course.php" class="cta-button btn btn-primary">Explore Courses</a>
       </div>
     </div>
   </div>
+</section>
+
+
 
   <!-- achivements -->
-  <div class="achievements">
-    <h3>
-      We collaborate with <strong>50+ </strong> leading universities and
-      companies
+<section class="achievements-section bg-light py-5">
+  <div class="container">
+    <h3 class="text-center mb-4">
+      Proudly Partnered with <strong>50+ </strong> Leading Universities and Companies
     </h3>
-    <div class="companies">
-      <a href="#"><img src="../Assets/images/1000px-IBM_logo.svg.png" alt="" /></a>
-      <a href="#"><img src="../Assets/images/penn.png" alt="" /></a>
-      <a href="#"><img src="../Assets/images/duke-3.png" alt="" /></a>
-      <a href="#"><img src="../Assets/images/illinois-3.png" alt="" /></a>
-      <a href="#"><img src="../Assets/images/imperial.png" alt="" /></a>
+    <div class="row justify-content-center">
+      <div class="col-md-2 col-4 mb-3">
+        <a href="#" class="achievement-company d-block">
+          <img src="../Assets/images/1000px-IBM_logo.svg.png" alt="IBM Logo" class="img-fluid" />
+        </a>
+      </div>
+      <div class="col-md-2 col-4 mb-3">
+        <a href="#" class="achievement-company d-block">
+          <img src="../Assets/images/penn.png" alt="University of Pennsylvania Logo" class="img-fluid" />
+        </a>
+      </div>
+      <div class="col-md-2 col-4 mb-3">
+        <a href="#" class="achievement-company d-block">
+          <img src="../Assets/images/duke-3.png" alt="Duke University Logo" class="img-fluid" />
+        </a>
+      </div>
+      <div class="col-md-2 col-4 mb-3">
+        <a href="#" class="achievement-company d-block">
+          <img src="../Assets/images/illinois-3.png" alt="University of Illinois Logo" class="img-fluid" />
+        </a>
+      </div>
+      <div class="col-md-2 col-4 mb-3">
+        <a href="#" class="achievement-company d-block">
+          <img src="../Assets/images/imperial.png" alt="Imperial College London Logo" class="img-fluid" />
+        </a>
+      </div>
     </div>
   </div>
+</section>
+
 
   <!-- cards for courses -->
   <section class="coursecontainer">
@@ -367,6 +392,50 @@
     </div>
   </section>
 
+<section class="past-highlights">
+  <div class="container">
+    <h2>Past Newsletter Highlights</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="highlight-card">
+          <h3 class="highlight-title">Coding Tips & Tricks</h3>
+          <p class="highlight-content">Discover useful coding techniques and tricks to enhance your skills.</p>
+          <a href="#" class="highlight-link">Read More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="highlight-card">
+          <h3 class="highlight-title">Industry Trends</h3>
+          <p class="highlight-content">Stay updated on the latest trends and developments in the tech industry.</p>
+          <a href="#" class="highlight-link">Read More</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="highlight-card">
+          <h3 class="highlight-title">Student Success Stories</h3>
+          <p class="highlight-content">Celebrate the achievements of our students and their coding journey.</p>
+          <a href="#" class="highlight-link">Read More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- news letter -->
+<section class="newsletter-signup">
+  <div class="container">
+    <div class="icon">
+      <i class="bi bi-envelope"></i>
+    </div>
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Stay updated about new courses, events, and industry updates.</p>
+    <form class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Enter your email">
+      <button type="submit" class="newsletter-button">Subscribe</button>
+    </form>
+  </div>
+</section>
+
   <!-- footer -->
   <footer class="bg-light">
     <div class="container py-5">
@@ -404,6 +473,8 @@
       <p class="mb-0">&copy; 2023 Code Crafter. All rights reserved.</p>
     </div>
   </footer>
+
+
 
 </body>
 
