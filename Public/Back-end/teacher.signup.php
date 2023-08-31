@@ -75,45 +75,74 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 <body>
     <!-- header navbar -->
     <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg p-3 mb-2 bg-light bg-gradient text-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+      <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
+            alt="Code-Crafetr" class="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Front-end/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../Front-end/course.php">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="whyus.php">Why We</a>
-                        </li>
-                        <li class="nav-item cc">
-                            <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-                        </li>
-                        <li class="nav-item cls">
-                            <a class="nav-link ls" href="../Front-end/login.html">Log in</a>
-                        </li>
-                        <div class="dropstart">
-                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                Sign Up
-                            </button>
-                            <ul class="dropdown-menu">
-                                <a class="dropdown-item" href="student.signup.php">Sign Up as Student</a>
-                                <a class="dropdown-item" href="teacher.signup.php">Sign Up as Faculty</a>
-                            </ul>
-                        </div>
-                </div>
-                </ul>
-            </div>
-            </div>
-        </nav>
-    </header>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../Front-end/home.php">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../Front-end/course.php">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="../Front-end/whyus.php">Why We</a>
+            </li>
+            <li class="nav-item cc">
+              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
+            </li>
+            
+            <?php
+              session_start();
+              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+                echo '<li class="nav-item cls mx-2">
+                      <a class="nav-link ls" href="mycourse.php">My course</a>
+                      </li>';
+                echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="Profile.php">
+                          Profile
+                        </a>
+                      </li>';
+                
+              }
+              elseif(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false){
+                echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="../front-end/login.php">Log in</a>
+                      </li>';
+                echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+              }
+              else{
+                echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="../front-end/login.php">Log in</a>
+                      </li>';
+                echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+              }
+            ?>
+        </div>
+        </ul>
+      </div>
+      </div>
+      </nav>
+  </header>
 
     <?php if (isset($_SESSION['successMessage'])) : ?>
         <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
@@ -213,42 +242,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     </main>
 
     <!-- footer -->
-    <footer class="bg-light">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-4">
-                    <h3 class="mb-4">About Us</h3>
-                    <p>We are dedicated to providing high-quality IT education and helping individuals become proficient
-                        coders.
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h3 class="mb-4">Quick Links</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#">My Course</a></li>
-                        <li><a href="#">Why We</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <div class="d-flex flex-column align-items-center">
-                        <img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
-                        <h3 class="mb-4">Contact Us</h3>
-                        <p>Email: info@code-crafter.com</p>
-                        <p>Phone: +123-456-7890</p>
-                        <div class="social-icons mt-4">
-                            <a href="#" class="text-dark"><i class="fab fa-facebook-square"></i></a>
-                            <a href="#" class="text-dark"><i class="fab fa-twitter-square"></i></a>
-                            <a href="#" class="text-dark"><i class="fab fa-instagram-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center py-3" style="background-color: #f0f0f0;">
-            <p class="mb-0">&copy; 2023 Code Crafter. All rights reserved.</p>
-        </div>
-    </footer>
-
+  <?php include "footer.php";?>
 </body>
 </html>

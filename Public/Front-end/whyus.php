@@ -42,9 +42,9 @@ if (isset($_GET['message'])) {
 
 <body>
 
-  <!-- header navbar -->
+    <!-- header navbar -->
   <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
+      <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
             alt="Code-Crafetr" class="logo" /></a>
@@ -61,8 +61,8 @@ if (isset($_GET['message'])) {
             <li class="nav-item">
               <a class="nav-link" href="course.php">Courses</a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="whyus.php">Why We</a>
+            <li class="nav-item">
+              <a class="nav-link active" href="whyus.php">Why We</a>
             </li>
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
@@ -70,7 +70,7 @@ if (isset($_GET['message'])) {
             
             <?php
               session_start();
-              if ($_SESSION['loggedin'] && $_SESSION['loggedin'] == true) {
+              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
@@ -81,9 +81,9 @@ if (isset($_GET['message'])) {
                       </li>';
                 
               }
-              elseif($_SESSION['loggedin'] && $_SESSION['loggedin'] == false){
+              elseif(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false){
                 echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.html">Log in</a>
+                        <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
                 echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
@@ -95,7 +95,7 @@ if (isset($_GET['message'])) {
               }
               else{
                 echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.html">Log in</a>
+                        <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
                 echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
@@ -110,7 +110,7 @@ if (isset($_GET['message'])) {
         </ul>
       </div>
       </div>
-    </nav>
+      </nav>
   </header>
 
   <!-- intro -->
@@ -219,7 +219,10 @@ if (isset($_GET['message'])) {
     <span id="message-text"></span>
   </div>
 
-  <script>
+    <!-- footer -->
+<?php include "../Back-end/footer.php";?>
+
+<script>
     const messageContainer = document.getElementById('message-container');
     const messageText = document.getElementById('message-text');
 
@@ -241,43 +244,6 @@ if (isset($_GET['message'])) {
       }, 5000); // Adjust the time (in milliseconds) as needed
     }
   </script>
-
-  <footer class="bg-light">
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-md-4">
-          <h3 class="mb-4">About Us</h3>
-          <p>We are dedicated to providing high-quality IT education and helping individuals become proficient coders.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <h3 class="mb-4">Quick Links</h3>
-          <ul class="list-unstyled">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">My Course</a></li>
-            <li><a href="#">Why We</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <div class="d-flex flex-column align-items-center">
-            <img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafter Logo" class="mb-3" style="max-width: 100px;">
-            <h3 class="mb-4">Contact Us</h3>
-            <p>Email: info@code-crafter.com</p>
-            <p>Phone: +123-456-7890</p>
-            <div class="social-icons mt-4">
-              <a href="#" class="text-dark"><i class="fab fa-facebook-square"></i></a>
-              <a href="#" class="text-dark"><i class="fab fa-twitter-square"></i></a>
-              <a href="#" class="text-dark"><i class="fab fa-instagram-square"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="text-center py-3" style="background-color: #f0f0f0;">
-      <p class="mb-0">&copy; 2023 Code Crafter. All rights reserved.</p>
-    </div>
-  </footer>
-
 </body>
 
 </html>
