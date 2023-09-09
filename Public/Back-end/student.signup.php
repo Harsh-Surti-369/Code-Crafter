@@ -11,19 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
   $cpswd = $_POST['cpswd'];
 
 
-  // Use prepared statements to prevent SQL injection
   $stmt = $conn->prepare("INSERT INTO student (sname, semail, pswd, cpswd) VALUES (?, ?, ?, ?)");
   if ($stmt) {
 
-    $stmt->bind_param("ssss", $sname, $semail, $hashedPassword, $cpswd);
+    $stmt->bind_param("ssss", $sname, $semail, $pswd, $cpswd);
     if ($stmt->execute()) {
-      $_SESSION['successMessage'] = "Successfully registered. Start learning today!";
+      header("Location: ../front-end/login.php"); 
     } else {
       $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
     }
   }
 
-  header("Location: login.html"); // Redirect to clear POST data
   exit();
 }
 ?>
@@ -70,14 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
               <a class="nav-link" href="../Front-end/course.php">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="../Front-end/whyus.php">Why We</a>
+              <a class="nav-link" href="../Front-end/whyus.php">Why We</a>
             </li>
             <li class="nav-item cc">
               <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
             </li>
             
             <?php
-              session_start();
               if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
@@ -96,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item active" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
@@ -108,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item active" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
@@ -189,10 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                  <img src="../Assets/images/studentimages/studnetform1.jpg" class="img-fluid" alt="Sample image">
-
-                </div>
+                    <img src="../Assets/images/fimg.webp" alt="">
+              </div>
               </div>
             </div>
           </div>

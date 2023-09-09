@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $stmt->bind_param("sssbsss", $fname, $femail, $fpswd, $fimgContent, $cvContent, $edu, $exp);
         if ($stmt->execute()) {
             $_SESSION['successMessage'] = "Successfully registered. Start teaching today!";
+            header("Location: ../Front-end/login.php"); // Redirect to clear POST data
         } else {
             $_SESSION['errorMessage'] = "Registration failed: ";
         }
@@ -44,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $_SESSION['errorMessage'] = "An internal error occurred. Please contact support.";
     }
 
-    header("Location: ../Front-end/login.php"); // Redirect to clear POST data
     exit();
 }
 ?>
