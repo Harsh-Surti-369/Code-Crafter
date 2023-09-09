@@ -186,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                    <img src="../Assets/images/fimg.webp" alt="">
+                  <img src="../Assets/images/studentimages/studnetform1.jpg" alt="">
               </div>
               </div>
             </div>

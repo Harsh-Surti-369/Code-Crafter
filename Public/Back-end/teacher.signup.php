@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     </div>
                 </div>
                 <div class="col-lg-6 mb-5"> <!-- Column for the image -->
-                    <img src="../Assets/images/4360109_2300469.jpg" class="img-fluid" alt="Side Image">
+                    <img src="../Assets/images/fimg2.jpg" class="" alt="Side Image">
                 </div>
             </div>
         </div>
