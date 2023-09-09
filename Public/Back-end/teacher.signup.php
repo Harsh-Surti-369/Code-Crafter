@@ -100,7 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             </li>
             
             <?php
-              session_start();
               if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>

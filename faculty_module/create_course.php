@@ -6,30 +6,34 @@
   if ($_SESSION['loggedin'] === false) {
     header("Location: ../public/Front-end/login.php");
     exit();
-  }
+  } elseif ($_SESSION['loggedin'] === true and $_SESSION['role'] === 'faculty') {
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $courseName = $_POST['courseName'];
-    $courseDesc = $_POST['courseDesc'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $courseName = $_POST['courseName'];
+      $courseDesc = $_POST['courseDesc'];
 
-    // Handle image and video uploads
-    $introImage = $_FILES['introImage']['tmp_name'];
-    $courseVideo = $_FILES['courseVideo']['tmp_name'];
+      // Handle image and video uploads
+      $introImage = $_FILES['introImage']['tmp_name'];
+      $courseVideo = $_FILES['courseVideo']['tmp_name'];
 
-    // Validate file types and move them to appropriate directories
-    $introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
-    $courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
+      // Validate file types and move them to appropriate directories
+      $introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
+      $courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
 
-    move_uploaded_file($introImage, 'uploads/' . $introImageName);
-    move_uploaded_file($courseVideo, 'uploads/' . $courseVideoName);
+      move_uploaded_file($introImage, 'uploads/' . $introImageName);
+      move_uploaded_file($courseVideo, 'uploads/' . $courseVideoName);
 
-    // Insert new course details into the database
-    $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
+      // Insert new course details into the database
+      $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
                     VALUES ('$courseName', '$courseDesc', '$introImageName', '$courseVideoName')";
-    mysqli_query($conn, $insertQuery);
+      mysqli_query($conn, $insertQuery);
 
-    // Redirect to the course intro page or a suitable location
-    header("Location: ../public/front-end/course.php");
+      // Redirect to the course intro page or a suitable location
+      header("Location: ../public/front-end/course.php");
+      exit();
+    }
+  } else {
+    header("Location: ../public/Front-end/login.php");
     exit();
   }
   ?>
@@ -50,34 +54,46 @@
    <!-- font awesome -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
+   <link rel="stylesheet" href="../Public/Front-end/CSS/create_course.css">
    <title>Create your new course</title>
  </head>
 
  <body>
-   <div class="container mt-5">
-     <div class="row">
-       <div class="col-md-4 offset-md-4">
-         <div class="course-card p-3">
-           <h1>Create Course</h1>
-           <form action="create_course.php" method="post" enctype="multipart/form-data">
-             <label for="courseName">Course Name:</label>
-             <input type="text" id="courseName" name="courseName" required><br><br>
+  
+ <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="course-card">
+                    <h1>Create Course</h1>
+                    <form action="create_course.php" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="courseName" class="form-label">Course Name:</label>
+                            <input type="text" id="courseName" name="courseName" class="form-control" required>
+                        </div>
 
-             <label for="courseDesc">Course Description:</label><br>
-             <textarea id="courseDesc" name="courseDesc" rows="4" cols="50" required></textarea><br><br>
+                        <div class="mb-3">
+                            <label for="courseDesc" class="form-label">Course Description:</label>
+                            <textarea id="courseDesc" name="courseDesc" rows="2" class="form-control" required></textarea>
+                        </div>
 
-             <label for="introImage">Intro Image:</label>
-             <input type="file" id="introImage" name="introImage" accept="image/*" required><br><br>
+                        <div class="mb-3">
+                            <label for="introImage" class="form-label">Intro Image:</label>
+                            <input type="file" id="introImage" name="introImage" accept="image/*" class="form-control" required>
+                        </div>
 
-             <label for="courseVideo">Course Video:</label>
-             <input type="file" id="courseVideo" name="courseVideo" accept="video/*" required><br><br>
+                        <div class="mb-3">
+                            <label for="courseVideo" class="form-label">Course Video:</label>
+                            <input type="file" id="courseVideo" name="courseVideo" accept="video/*" class="form-control" required>
+                        </div>
 
-             <button type="submit">Create Course</button>
-           </form>
-         </div>
-       </div>
-     </div>
-   </div>
+                        <label class="file-input-label">Upload a high-quality image and video for your course.</label>
+
+                        <button type="submit" class="btn btn-create-course">Create Course</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
  </body>
 
  </html>
