@@ -1,3 +1,3 @@
 <?php 
-    $login = "../Front-end/login.html";
+    $login = "../Front-end/login.php";
         header("Location: ". $login);

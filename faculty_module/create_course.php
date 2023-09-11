@@ -20,8 +20,8 @@
       $introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
       $courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
 
-      move_uploaded_file($introImage, 'uploads/' . $introImageName);
-      move_uploaded_file($courseVideo, 'uploads/' . $courseVideoName);
+      move_uploaded_file($introImage, 'code-crafter/faculty_module/uploads/' . $introImageName);
+      move_uploaded_file($courseVideo, 'code-crafter/faculty_module/uploads/' . $courseVideoName);
 
       // Insert new course details into the database
       $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 

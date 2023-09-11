@@ -102,96 +102,56 @@ $coursesResult = mysqli_query($conn, $coursesQuery);
     <section class="mb-5">
       <h2>Newly Arrived Courses</h2>
       <div class="row">
-        <!-- Course 1 -->
-        <div class="col-md-4">
-          <div class="course-cards-container">
-            <?php while ($course = mysqli_fetch_assoc($coursesResult)) { ?>
-              <div>
-                <h2><?php echo $course['course_name']; ?></h2>
-                <p><?php echo $course['description']; ?></p>
-                <img src="uploads/<?php echo $course['intro_image']; ?>" alt="Intro Image" width="200">
-                <video controls>
-                  <source src="uploads/<?php echo $course['course_video']; ?>" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            <?php } ?>
-          </div>
-        </div>
-        <!-- Course 2 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c3.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
+        <?php
+        // Fetch courses from the database
+        $query = "SELECT * FROM courses "; // Change this query based on your criteria
+        $result = mysqli_query($conn, $query);
+
+        while ($course = mysqli_fetch_assoc($result)) {
+            ?>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
+                    <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                    <p class="card-text"><?php echo $course['description']; ?></p>
+                    <p class="faculty-name">Faculty: <?php echo " name"?></p>
+                    <div class="buttons">
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <!-- Course 3 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c2.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </div>
+        <?php } ?>
+    </div>
     </section>
 
     <!-- Section 2: Most Viewed Courses -->
     <section class="mb-5 alt">
-      <h2>Most Viewed Courses</h2>
-      <div class="row">
-        <!-- Course 1 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c1.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
+    <h2>Most Viewed Courses</h2>
+    <div class="row">
+        <?php
+        // Fetch courses from the database
+        $query = "SELECT * FROM courses ORDER BY views DESC LIMIT 3"; // Change this query based on your criteria
+        $result = mysqli_query($conn, $query);
+
+        while ($course = mysqli_fetch_assoc($result)) {
+            ?>
+            <div class="col-md-4">
+                <div class="course-card">
+                    <img src="uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
+                    <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                    <p class="card-text"><?php echo $course['description']; ?></p>
+                    <p class="faculty-name">Faculty: <?php echo $course['faculty_name']; ?></p>
+                    <div class="buttons">
+                        <a href="#" class="btn btn-primary">Buy Now</a>
+                        <a href="#" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <!-- Course 2 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c4.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Course 3 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c1.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <?php } ?>
+    </div>
+</section>
+
 
     <!-- Section 3: Best Rated Courses -->
     <section class="mb-5">
