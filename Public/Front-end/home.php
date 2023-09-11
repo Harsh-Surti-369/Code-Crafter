@@ -63,24 +63,24 @@
             
             <?php
               session_start();
-              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'faculty') {
-                echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
-                      </li>';
-                echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="../upload_video.php">
-                          
-                        </a>
-                      </li>';
-                
-              }
-              elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'student') {
+              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'student') {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
                 echo '<li class="nav-item cls">
                         <a class="nav-link ls" href="Profile.php">
                           Profile
+                        </a>
+                      </li>';
+                
+              }
+              elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'faculty') {
+                echo '<li class="nav-item cls mx-2">
+                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
+                      </li>';
+                echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="../upload_video.php">
+                          Update course
                         </a>
                       </li>';
                 

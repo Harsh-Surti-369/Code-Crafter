@@ -1,3 +1,25 @@
+<?php
+// Include your database connection
+require '../back-end/dbconnect.php';
+
+// Get the course_name from the URL parameter and decode it
+$courseName = urldecode($_GET['course_name']);
+
+// Fetch the course details based on the course_name
+$query = "SELECT * FROM courses WHERE course_name = '$courseName'"; // Modify this query as per your database structure
+$result = mysqli_query($conn, $query);
+
+// Check if the course exists
+if (mysqli_num_rows($result) === 1) {
+    $course = mysqli_fetch_assoc($result);
+    $videoPath = 'uploads/' . $course['course_video'];
+} else {
+    // Handle the case where the course doesn't exist
+    echo "Course not found.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,41 +39,71 @@
     <link rel="stylesheet" href="CSS/headerfooter.css" />
     <link rel="stylesheet" href="CSS/course_player.css" />
     <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
-    <title>course_play</title>
+    <title><?php echo $course['course_name']; ?> Video</title>
+
+    <style>
+        /* Add your custom CSS styles here */
+        .video-container {
+            max-width: 70%;
+            margin: 0 auto;
+        }
+        .video-list {
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+    </style>
+
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <!-- Video Player -->
-                <div class="video-container">
-                    <!-- Embed your video here using an iframe -->
-                    <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <!-- Course Details -->
-                <div class="course-details">
-                    <h2>Course Name</h2>
-                    <p>Video Name: Lorem ipsum dolor sit amet</p>
-                    <p>Video Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <!-- Next Video List -->
-                <div class="video-list">
-                    <h3>Next Videos</h3>
-                    <ul>
-                        <!-- Example of a video list item -->
-                        <li>
-                            <span>Video Name</span>
-                            <span>Duration: 10:30</span>
-                        </li>
-                        <!-- Repeat this list item structure for each next video -->
-                    </ul>
-                </div>
-            </div>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Video Player on the Left -->
+        <div class="col-md-8 video-container">
+            <!-- Replace the video source with your actual video URL -->
+            <video controls width="100%">
+                <source src="video_url_here.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Course Details on the Right -->
+        <div class="col-md-4 video-list">
+            <!-- Course Name (Dynamic) -->
+            <h4><?php echo $course['course_name']; ?></h4>
+
+            <!-- Course Description (Dynamic) -->
+            <p><?php echo $course['description']; ?></p>
+
+            <h5>Other Videos in This Course</h5>
+            <ul class="list-group">
+                <!-- Replace with dynamic data from your database -->
+                <?php
+                // Sample data (replace with database query)
+                $otherVideos = [
+                    ['title' => 'Video 1', 'url' => 'video_url_1.mp4'],
+                    ['title' => 'Video 2', 'url' => 'video_url_2.mp4'],
+                    // Add more videos here...
+                ];
+
+                if (empty($otherVideos)) {
+                    echo '<p>No more videos in this course</p>';
+                } else {
+                    foreach ($otherVideos as $video) {
+                        echo '<li class="list-group-item"><a href="' . $video['url'] . '">' . $video['title'] . '</a></li>';
+                    }
+                }
+                ?>
+            </ul>
+            
+            <!-- Button to Move to Course Page -->
+            <a href="course.php" class="btn btn-primary mt-3">Back to  All Course</a>
         </div>
     </div>
+</div>
+
+<!-- Bootstrap 5 JS (Optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

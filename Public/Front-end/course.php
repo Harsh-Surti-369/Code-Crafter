@@ -117,7 +117,7 @@ $coursesResult = mysqli_query($conn, $coursesQuery);
                     <p class="faculty-name">Faculty: <?php echo " name"?></p>
                     <div class="buttons">
                         <a href="#" class="btn btn-primary">Buy Now</a>
-                        <a href="#" class="btn btn-secondary">Learn More</a>
+                        <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-secondary">Learn More</a>
                     </div>
                 </div>
             </div>
