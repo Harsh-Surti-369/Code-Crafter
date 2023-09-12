@@ -12,21 +12,21 @@
       $courseName = $_POST['courseName'];
       $courseDesc = $_POST['courseDesc'];
 
-      // Handle image and video uploads
-      $introImage = $_FILES['introImage']['tmp_name'];
-      $courseVideo = $_FILES['courseVideo']['tmp_name'];
+// Handle image and video uploads
+$introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
+$courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
 
-      // Validate file types and move them to appropriate directories
-      $introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
-      $courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
+$introImagePath = '../uploads/' . $introImageName;
+$courseVideoPath = 'code-crafter/faculty_module/uploads/' . $courseVideoName;
 
-      move_uploaded_file($introImage, 'code-crafter/faculty_module/uploads/' . $introImageName);
-      move_uploaded_file($courseVideo, 'code-crafter/faculty_module/uploads/' . $courseVideoName);
+move_uploaded_file($_FILES['introImage']['tmp_name'], $introImagePath);
+move_uploaded_file($_FILES['courseVideo']['tmp_name'], $courseVideoPath);
 
-      // Insert new course details into the database
-      $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
-                    VALUES ('$courseName', '$courseDesc', '$introImageName', '$courseVideoName')";
-      mysqli_query($conn, $insertQuery);
+// Insert new course details into the database with file paths
+$insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
+                VALUES ('$courseName', '$courseDesc', '$introImagePath', '$courseVideoPath')";
+mysqli_query($conn, $insertQuery);
+
 
       // Redirect to the course intro page or a suitable location
       header("Location: ../public/front-end/course.php");

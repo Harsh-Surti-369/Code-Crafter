@@ -1,11 +1,4 @@
-<?php
-    session_start();
-    if (!($_SESSION['loggedin']=true && $_SESSION['role']='faculty')) {
-        $login = "../Front-end/index.php";
-        header("Location: ". $login);
-        exit();
-    }
-?>
+<?session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,5 +97,15 @@
     </nav>
   </header>
     
+  <?php
+// Include the footer
+include('footer.php');
+
+    if (!($_SESSION['loggedin']=true && $_SESSION['role']='faculty')) {
+        $login = "../Front-end/index.php";
+        header("Location: ". $login);
+        exit();
+    }
+?>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-
 // Check if the user is trying to logout
 if (isset($_POST['logout'])) {
     // Unset all session variables

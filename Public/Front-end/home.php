@@ -63,7 +63,7 @@
             
             <?php
               session_start();
-              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'student') {
+              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
@@ -74,7 +74,7 @@
                       </li>';
                 
               }
-              elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] = 'faculty') {
+              elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
                       </li>';
@@ -86,6 +86,18 @@
                 
               }
               elseif(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false){
+                echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.php">Log in</a>
+                      </li>';
+                echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+              }
+              elseif(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest'){
                 echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
