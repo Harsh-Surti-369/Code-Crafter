@@ -1,26 +1,3 @@
-<?php
-session_start();
-     // Include your database connection
-     require '../back-end/dbconnect.php';
-
-     // Get the course_name from the URL parameter and decode it
-     $courseName = urldecode($_GET['course_name']);
- 
-     // Fetch the course details based on the course_name
-     $query = "SELECT * FROM courses WHERE course_name = '$courseName'"; // Modify this query as per your database structure
-     $result = mysqli_query($conn, $query);
- 
-     // Check if the course exists
-     if (mysqli_num_rows($result) === 1) {
-         $course = mysqli_fetch_assoc($result);
-         $videoPath = 'uploads/' . $course['course_video'];
-     } else {
-         // Handle the case where the course doesn't exist
-         echo "Course not found.";
-         exit;
-     }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,10 +30,57 @@ session_start();
             background-color: #f9f9f9;
             padding: 20px;
         }
+    .custom-login-button {
+        background-color: #FF5722; /* Change the background color to your desired color */
+        color: #fff; /* Change the text color to white or any color you prefer */
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+
+    .custom-login-button:hover {
+        background-color: #D84315; /* Change the background color on hover */
+        color: #fff; /* Change the text color on hover */
+    }
     </style>
 
 </head>
+<?php
+session_start();
+// Include your database connection
+require '../back-end/dbconnect.php';
 
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
+    // Display an alert message using Bootstrap classes
+    echo '<div class="alert alert-danger" role="alert">';
+    echo '<h2 class="alert-heading">Login Required</h2>';
+    echo '<p>Login first to access courses.</p>';
+    echo '<a class="btn btn-primary custom-login-button" href="login.php">Log in</a>';
+    echo '</div>';
+    exit(); // Stop further execution
+}
+
+else{}
+
+     // Get the course_name from the URL parameter and decode it
+     $courseName = urldecode($_GET['course_name']);
+ 
+     // Fetch the course details based on the course_name
+     $query = "SELECT * FROM courses WHERE course_name = '$courseName'"; // Modify this query as per your database structure
+     $result = mysqli_query($conn, $query);
+ 
+     // Check if the course exists
+     if (mysqli_num_rows($result) === 1) {
+         $course = mysqli_fetch_assoc($result);
+         $videoPath = 'uploads/' . $course['course_video'];
+     } else {
+         // Handle the case where the course doesn't exist
+         echo "Course not found.";
+         exit();
+     }
+?>
 <body>
     <div class="container mt-5">
         <div class="row">

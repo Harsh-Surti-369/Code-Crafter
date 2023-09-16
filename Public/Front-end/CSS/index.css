@@ -12,7 +12,7 @@ body {
 /* hero section */
 .hero-section {
   margin: 0 !important;
-  background-image: url('../../Assets/images/herobackimg2.jpg');
+  background-image: url('../../Assets/images/hero2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -45,7 +45,7 @@ body {
   font-size: 1.5rem;
   margin-bottom: 15px;
   animation: sloganBounce 4s ease-in-out infinite alternate;
-  color: #f7b731;
+  color: rgb(47, 46, 46);
   /* Adjust text color */
 }
 
@@ -53,7 +53,9 @@ body {
   font-size: 3rem;
   margin-bottom: 30px;
   animation: headingScale 4s ease-in-out infinite alternate;
-  color: #ffffff;
+  color: #ec9090;
+  font-weight: 900;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .cta-button {
@@ -138,7 +140,6 @@ strong {
 
 /* courses cards */
 .coursecontainer {
-  background-color: rgb(251, 240, 240);
   padding: 20px 0;
   display:flex;
   flex-wrap: wrap;

@@ -1,8 +1,8 @@
 <?php
 session_start();
-if($SESSION['loggedin'] == false){
-      echo "<h2>Login first to access courses</h>";
-      echo ”<a class="ls" href="login.php">Log in</a>”;
+if (isset($SESSION['loggedin']) && $SESSION['loggedin'] == false) {
+  echo "<h2>Login first to access courses</h>";
+  echo "<a class='ls' href='login.php'>Log in</a>";
 }
 require '../back-end/dbconnect.php';
 
@@ -56,7 +56,7 @@ require '../back-end/dbconnect.php';
             </li>
 
             <?php
-            
+
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
               echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
@@ -109,21 +109,46 @@ require '../back-end/dbconnect.php';
         $coursesQuery = "SELECT * FROM courses";
         $coursesResult = mysqli_query($conn, $coursesQuery);
 
-        while ($course = mysqli_fetch_assoc($coursesResult)) {
+        if (!$coursesResult) {
+          // Handle the query error for courses
+          echo "Error: " . mysqli_error($conn);
+        } else {
+          while ($course = mysqli_fetch_assoc($coursesResult)) {
+            // Retrieve faculty information based on 'fid'
+            $fid = $course['fid'];
+            $facultyQuery = "SELECT * FROM faculty WHERE fid = $fid";
+            $facultyResult = mysqli_query($conn, $facultyQuery);
+
+            if (!$facultyResult) {
+              echo "Error in faculty query: " . mysqli_error($conn);
+            } else {
+              $faculty = mysqli_fetch_assoc($facultyResult);
+
+              // Display the course card with the image and faculty information
         ?>
-          <div class="col-md-4">
-            <div class="course-card">
-              <img src="<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
-              <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
-              <p class="card-text"><?php echo $course['description']; ?></p>
-              <p class="faculty-name">Faculty: <?php echo " name" ?></p>
-              <div class="buttons">
-                <a href="#" class="btn btn-primary">Buy Now</a>
-                <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-secondary">Learn</a>
+              <div class="col-md-4">
+                <div class="course-card">
+                  <?php
+                  $imageType = 'jpg';
+                  $base64Image = base64_encode($course['intro_image']);
+
+                  // Create a data URI for the image
+                  $dataURI = "data:$imageType;base64,$base64Image";
+                  ?>
+                  <img src="<?php echo $dataURI; ?>" class="img-fluid mb-3" alt="Course Image">
+                  <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                  <p class="card-text"><?php echo $course['description']; ?></p>
+                  <p class="faculty-name">Faculty: <?php echo $faculty['fullname']; ?></p>
+                  <div class="buttons">
+                    <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-secondary">Learn</a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        <?php } ?>
+        <?php
+            }
+          }
+        }
+        ?>
       </div>
     </section>
 
@@ -132,74 +157,40 @@ require '../back-end/dbconnect.php';
       <h2>Most Viewed Courses</h2>
       <div class="row">
         <?php
-        // Fetch courses from the database
-        $query = "SELECT * FROM courses ORDER BY views DESC LIMIT 3"; // Change this query based on your criteria
+        // Fetch courses from the database based on your criteria
+        $query = "SELECT * FROM courses ORDER BY views DESC LIMIT 3"; // Change the limit as needed
         $result = mysqli_query($conn, $query);
 
-        while ($course = mysqli_fetch_assoc($result)) {
+        if (!$result) {
+          echo '<div class="alert alert-danger" role="alert">';
+          echo 'Error fetching most viewed courses: ' . mysqli_error($conn);
+          echo '</div>';
+        } else {
+          while ($course = mysqli_fetch_assoc($result)) {
+            // Retrieve faculty information based on the faculty_id
+            $facultyId = $course['fid'];
+            $facultyQuery = "SELECT * FROM faculty WHERE fid = $facultyId";
+            $facultyResult = mysqli_query($conn, $facultyQuery);
+            $faculty = mysqli_fetch_assoc($facultyResult);
         ?>
-          <div class="col-md-4">
-            <div class="course-card">
-              <img src="uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
-              <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
-              <p class="card-text"><?php echo $course['description']; ?></p>
-              <p class="faculty-name">Faculty: <?php echo $course['faculty_name']; ?></p>
-              <div class="buttons">
-                <a href="#" class="btn btn-primary">Buy Now</a>
-                <a href="#" class="btn btn-secondary">Learn More</a>
+            <div class="col-md-4">
+              <div class="course-card">
+                <img src="<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
+                <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                <p class="card-text"><?php echo $course['description']; ?></p>
+                <p class="faculty-name">Faculty: <?php echo $faculty['fullname']; ?></p>
+                <div class="buttons">
+                  <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
               </div>
             </div>
-          </div>
-        <?php } ?>
+        <?php
+          }
+        }
+        ?>
       </div>
     </section>
 
-
-    <!-- Section 3: Best Rated Courses -->
-    <section class="mb-5">
-      <h2>Best Rated Courses</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c3.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Course 2 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c2.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Course 3 -->
-        <div class="col-md-4">
-          <div class="course-card">
-            <img src="../Assets/couse image/c1.jpg" class="img-fluid mb-3" alt="Course Image">
-            <h5 class="card-title">Introduction to Web Development</h5>
-            <p class="card-text">Learn the basics of building websites using HTML, CSS, and JavaScript.</p>
-            <p class="faculty-name">Faculty: John Doe</p>
-            <div class="buttons">
-              <a href="#" class="btn btn-primary">Buy Now</a>
-              <a href="#" class="btn btn-secondary">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Add more course cards as needed -->
-      </div>
-    </section>
 
     <!-- Section 4: Courses Filtered by Faculty -->
     <section class="mb-5 alt">

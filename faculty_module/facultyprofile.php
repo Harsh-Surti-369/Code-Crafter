@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="../Front-end/home.php">Home</a>
+              <a class="nav-link active" href="../public/Front-end/home.php">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="course.php">Courses</a>
@@ -54,7 +54,7 @@
             </li>
             
             <?php
-              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true && $_SESSION['role'] == "faculty") {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="create_course.php">Create course</a>
                       </li>';
@@ -77,18 +77,7 @@
                         </ul>
                       </div>';
               }
-              else{
-                echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-                echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-              }
+              else{}
             ?>
         </div>
         </ul>
