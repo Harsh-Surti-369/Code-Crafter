@@ -1,4 +1,9 @@
 <?php
+session_start();
+if($SESSION['loggedin'] == false){
+      echo "<h2>Login first to access courses</h>";
+      echo ”<a class="ls" href="login.php">Log in</a>”;
+}
 require '../back-end/dbconnect.php';
 
 ?>
@@ -51,7 +56,7 @@ require '../back-end/dbconnect.php';
             </li>
 
             <?php
-            session_start();
+            
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
               echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
