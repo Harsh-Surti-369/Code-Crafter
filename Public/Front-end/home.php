@@ -63,7 +63,7 @@
             
             <?php
               session_start();
-              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
+              if ( $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
@@ -74,7 +74,7 @@
                       </li>';
                 
               }
-              elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
+              elseif ( $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
                 echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
                       </li>';
