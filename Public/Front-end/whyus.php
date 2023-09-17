@@ -143,7 +143,7 @@ if (isset($_GET['message'])) {
           <p class="mission-values">
             Our mission is to democratize IT education by providing accessible and transformative learning experiences. We believe in fostering a community of lifelong learners who are empowered to achieve their career goals through hands-on, practical learning.
           </p>
-          <a href="#courses" class="cta-button">Explore Our Courses</a>
+          <a href="course.php" class="cta-button">Explore Our Courses</a>
         </div>
         <div class="col-lg-6">
           <div class="intro-image">
@@ -192,7 +192,7 @@ if (isset($_GET['message'])) {
         </div>
         <div class="col-lg-6">
           <div class="social-responsibility-image">
-            <img src="../Assets/images/Visualize an impact.jpg" alt="Social Responsibility Initiatives">
+            <img src="../Assets/images/why3.jpg" alt="Social Responsibility Initiatives">
           </div>
         </div>
       </div>

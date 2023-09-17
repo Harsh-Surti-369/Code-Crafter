@@ -30,20 +30,25 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
-    .custom-login-button {
-        background-color: #FF5722; /* Change the background color to your desired color */
-        color: #fff; /* Change the text color to white or any color you prefer */
-        border: none;
-        padding: 10px 20px;
-        text-decoration: none;
-        font-weight: bold;
-        border-radius: 5px;
-    }
 
-    .custom-login-button:hover {
-        background-color: #D84315; /* Change the background color on hover */
-        color: #fff; /* Change the text color on hover */
-    }
+        .custom-login-button {
+            background-color: #FF5722;
+            /* Change the background color to your desired color */
+            color: #fff;
+            /* Change the text color to white or any color you prefer */
+            border: none;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .custom-login-button:hover {
+            background-color: #D84315;
+            /* Change the background color on hover */
+            color: #fff;
+            /* Change the text color on hover */
+        }
     </style>
 
 </head>
@@ -61,34 +66,47 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
     echo '</div>';
     exit(); // Stop further execution
 }
-
-else{}
-
-     // Get the course_name from the URL parameter and decode it
-     $courseName = urldecode($_GET['course_name']);
- 
-     // Fetch the course details based on the course_name
-     $query = "SELECT * FROM courses WHERE course_name = '$courseName'"; // Modify this query as per your database structure
-     $result = mysqli_query($conn, $query);
- 
-     // Check if the course exists
-     if (mysqli_num_rows($result) === 1) {
-         $course = mysqli_fetch_assoc($result);
-         $videoPath = 'uploads/' . $course['course_video'];
-     } else {
-         // Handle the case where the course doesn't exist
-         echo "Course not found.";
-         exit();
-     }
 ?>
+
 <body>
+    <?php
+    session_start();
+    require '../back-end/dbconnect.php';
+
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
+        echo '<div class="alert alert-danger" role="alert">';
+        echo '<h2 class="alert-heading">Login Required</h2>';
+        echo '<p>Login first to access courses.</p>';
+        echo '<a class="btn btn-primary custom-login-button" href="login.php">Log in</a>';
+        echo '</div>';
+        exit();
+    }
+
+    // Get the course_name from the URL parameter and decode it
+    $courseName = urldecode($_GET['course_name']);
+
+    // Fetch the course details based on the course_name
+    $query = "SELECT * FROM courses WHERE course_name = '$courseName'";
+    $result = mysqli_query($conn, $query);
+
+    // Check if the course exists
+    if (mysqli_num_rows($result) === 1) {
+        $course = mysqli_fetch_assoc($result);
+        $videoPath = 'uploads/' . $course['course_video'];
+    } else {
+        // Handle the case where the course doesn't exist
+        echo "Course not found.";
+        exit();
+    }
+    ?>
+
     <div class="container mt-5">
         <div class="row">
             <!-- Video Player on the Left -->
             <div class="col-md-8 video-container">
-                <!-- Replace the video source with your actual video URL -->
+                <!-- Video Player -->
                 <video controls width="100%">
-                <video src="<?php echo $course['course_video']; ?>" controls></video>
+                    <source src="<?php echo $videoPath; ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -101,34 +119,32 @@ else{}
                 <!-- Course Description (Dynamic) -->
                 <p><?php echo $course['description']; ?></p>
 
+                <!-- List of Other Videos in This Course (Dynamic) -->
                 <h5>Other Videos in This Course</h5>
                 <ul class="list-group">
                     <!-- Replace with dynamic data from your database -->
                     <?php
-                    // Sample data (replace with database query)
-                    $otherVideos = [
-                        ['title' => 'Video 1', 'url' => 'video_url_1.mp4'],
-                        ['title' => 'Video 2', 'url' => 'video_url_2.mp4'],
-                        // Add more videos here...
-                    ];
+                    // Fetch other videos in the same course from the database
+                    $courseId = $course['id']; // Assuming 'id' is the primary key of the 'courses' table
+                    $otherVideosQuery = "SELECT * FROM courses WHERE id != $courseId AND fid = {$course['fid']}";
+                    $otherVideosResult = mysqli_query($conn, $otherVideosQuery);
 
-                    if (empty($otherVideos)) {
+                    if (mysqli_num_rows($otherVideosResult) === 0) {
                         echo '<p>No more videos in this course</p>';
                     } else {
-                        foreach ($otherVideos as $video) {
-                            echo '<li class="list-group-item"><a href="' . $video['url'] . '">' . $video['title'] . '</a></li>';
+                        while ($otherVideo = mysqli_fetch_assoc($otherVideosResult)) {
+                            echo '<li class="list-group-item"><a href="course_player.php?course_name=' . urlencode($otherVideo['course_name']) . '">' . $otherVideo['course_name'] . '</a></li>';
                         }
                     }
                     ?>
                 </ul>
-                
-                <!-- Button to Move to Course Page -->
-                <a href="course.php" class="btn btn-primary mt-3">Back to All Course</a>
+
+                <!-- Button to Go Back to All Courses -->
+                <a href="course.php" class="btn btn-primary mt-3">Back to All Courses</a>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

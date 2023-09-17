@@ -164,140 +164,6 @@
     </div>
   </section>
 
-  <!-- cards for courses -->
-  <section class="coursecontainer">
-    <h2 class="text-info text-center">Explore our Courses</h2>
-    <div class="container mt-5">
-      <div class="d-flex flex-wrap justify-content-center">
-        <div id="introCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-              <div class="row justify-content-center">
-                <!-- Card 1 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+1" class="card-img-top" alt="Image 3">
-                    <div class="card-body">
-                      <h5 class="card-title">Course Introduction</h5>
-                      <p class="card-text">Welcome to our exciting course! In this module, you will learn...</p>
-                      <p class="card-text"><strong>Price: $99.99</strong></p>
-                      <a href="#" class="btn btn-primary">Learn More</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+2" class="card-img-top" alt="Image 3">
-                    <div class="card-body">
-                      <h5 class="card-title">Course Introduction 2</h5>
-                      <p class="card-text">Discover the amazing world of our course!...</p>
-                      <p class="card-text"><strong>Price: $89.99</strong></p>
-                      <a href="#" class="btn btn-primary">Explore</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+3" class="card-img-top" alt="Image 3">
-                    <div class="card-body">
-                      <h5 class="card-title">Course Introduction 3</h5>
-                      <p class="card-text">Embark on a journey of learning and growth...</p>
-                      <p class="card-text"><strong>Price: $79.99</strong></p>
-                      <a href="#" class="btn btn-primary">Start Now</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+4" class="card-img-top" alt="Image 4">
-                    <div class="card-body">
-                      <h5 class="card-title">Course Introduction 4</h5>
-                      <p class="card-text">Ready to dive into an exciting educational journey?...</p>
-                      <p class="card-text"><strong>Price: $69.99</strong></p>
-                      <a href="#" class="btn btn-primary">Get Started</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Add more slides similarly with four cards each -->
-            <div class="carousel-item">
-              <div class="row justify-content-center">
-                <!-- Card 5 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+5" class="card-img-top" alt="Image 5">
-                    <div class="card-body">
-                      <h5 class="card-title">IT Course 5</h5>
-                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      <p class="card-text"><strong>Price: $89.99</strong></p>
-                      <a href="#" class="btn btn-primary">Learn More</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+6" class="card-img-top" alt="Image 6">
-                    <div class="card-body">
-                      <h5 class="card-title">IT Course 6</h5>
-                      <p class="card-text">Vestibulum facilisis bibendum dui, vel vehicula ex blandit vel.</p>
-                      <p class="card-text"><strong>Price: $79.99</strong></p>
-                      <a href="#" class="btn btn-primary">Explore</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 7 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+7" class="card-img-top" alt="Image 7">
-                    <div class="card-body">
-                      <h5 class="card-title">IT Course 7</h5>
-                      <p class="card-text">Aenean dapibus eget nisi sed varius.</p>
-                      <p class="card-text"><strong>Price: $69.99</strong></p>
-                      <a href="#" class="btn btn-primary">Start Now</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card 8 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/150?text=Image+8" class="card-img-top" alt="Image 8">
-                    <div class="card-body">
-                      <h5 class="card-title">IT Course 8</h5>
-                      <p class="card-text">Praesent eget lorem id erat varius vestibulum.</p>
-                      <p class="card-text"><strong>Price: $59.99</strong></p>
-                      <a href="#" class="btn btn-primary">Get Started</a>
-                      <button class="btn btn-success mt-2">Add to Cart</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Carousel Controls -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#introCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#introCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-  </section>
 
   <!-- appreciation   -->
   <section id="student-reviews" class="py-5">
@@ -370,7 +236,7 @@
               <h3 class="card-title">Web Development Workshop</h3>
               <p class="card-text">Join us for an interactive web development workshop on HTML and CSS.</p>
               <p class="card-text"><strong>Date: August 20, 2023</strong></p>
-              <a href="#" class="btn btn-secondary">Learn More</a>
+              <a href="https://github.com/gdsc-vitap/Web-Development-Workshop" class="btn btn-secondary">Learn More</a>
             </div>
           </div>
         </div>
@@ -380,7 +246,7 @@
               <h3 class="card-title">Data Science Seminar</h3>
               <p class="card-text">Discover the world of data science in our upcoming seminar.</p>
               <p class="card-text"><strong>Date: September 5, 2023</strong></p>
-              <a href="#" class="btn btn-secondary">Learn More</a>
+              <a href="https://datasciencecampus.ons.gov.uk/capability/data-science-seminar-series/" class="btn btn-secondary">Learn More</a>
             </div>
           </div>
         </div>
@@ -390,7 +256,7 @@
               <h3 class="card-title">Coding Competition</h3>
               <p class="card-text">Test your coding skills in our annual coding competition.</p>
               <p class="card-text"><strong>Date: October 15, 2023</strong></p>
-              <a href="#" class="btn btn-secondary">Learn More</a>
+              <a href="https://www.geeksforgeeks.org/top-15-websites-for-coding-challenges-and-competitions/" class="btn btn-secondary">Learn More</a>
             </div>
           </div>
         </div>
@@ -406,21 +272,21 @@
           <div class="highlight-card">
             <h3 class="highlight-title">Coding Tips & Tricks</h3>
             <p class="highlight-content">Discover useful coding techniques and tricks to enhance your skills.</p>
-            <a href="#" class="highlight-link">Read More</a>
+            <a href="https://www.geeksforgeeks.org/7-tips-and-tricks-to-learn-programming-faster/" class="highlight-link">Read More</a>
           </div>
         </div>
         <div class="col-md-4">
           <div class="highlight-card">
             <h3 class="highlight-title">Industry Trends</h3>
             <p class="highlight-content">Stay updated on the latest trends and developments in the tech industry.</p>
-            <a href="#" class="highlight-link">Read More</a>
+            <a href="https://www.simplilearn.com/top-technology-trends-and-jobs-article" class="highlight-link">Read More</a>
           </div>
         </div>
         <div class="col-md-4">
           <div class="highlight-card">
             <h3 class="highlight-title">Student Success Stories</h3>
             <p class="highlight-content">Celebrate the achievements of our students and their coding journey.</p>
-            <a href="#" class="highlight-link">Read More</a>
+            <a href="https://codingzen.in/student-success-stories/" class="highlight-link">Read More</a>
           </div>
         </div>
       </div>
