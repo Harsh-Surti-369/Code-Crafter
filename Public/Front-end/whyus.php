@@ -62,10 +62,7 @@ if (isset($_GET['message'])) {
             <li class="nav-item">
               <a class="nav-link active" href="whyus.php">Why We</a>
             </li>
-            <li class="nav-item cc">
-              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-            </li>
-
+            
             <?php
             session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {

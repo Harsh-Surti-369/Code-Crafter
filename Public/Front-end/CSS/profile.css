@@ -1,0 +1,52 @@
+/* custom.css */
+
+/* Center the card vertically */
+.card {
+    margin-top: 50px;
+}
+
+/* Style the card header */
+.card-header {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Style the card body */
+.card-body {
+    background-color: #f8f9fa;
+}
+
+/* Style the form inputs */
+.form-control {
+    border: 1px solid #ced4da;
+}
+
+/* Style the "Update Profile" button */
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #007BFF;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Style the "Delete Account" button */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Style the "Back to All Courses" button */
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}

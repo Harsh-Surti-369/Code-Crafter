@@ -49,9 +49,6 @@
             <li class="nav-item">
               <a class="nav-link" href="whyus.php">Why We</a>
             </li>
-            <li class="nav-item cc">
-              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-            </li>
 
             <?php
             session_start();
@@ -60,7 +57,7 @@
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
               echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="Profile.php">
+                        <a class="nav-link ls" href="Pofile.php">
                           Profile
                         </a>
                       </li>';
