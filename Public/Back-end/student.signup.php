@@ -48,14 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </head>
 
 <body>
-    <!-- header navbar -->
-    <header class="sticky-top">
-      <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
+  <!-- header navbar -->
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg"
-            alt="Code-Crafetr" class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -65,57 +63,68 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
               <a class="nav-link" href="../Front-end/home.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../Front-end/course.php">Courses</a>
+              <a class="nav-link" href="course.php">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../Front-end/whyus.php">Why We</a>
+              <a class="nav-link" href="whyus.php">Why We</a>
             </li>
-            <li class="nav-item cc">
-              <a class="nav-link cart"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #ad78df"></i></a>
-            </li>
-            
+
             <?php
-              if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-                echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="mycourse.php">My course</a>
-                      </li>';
-                echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="Profile.php">
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
+              echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="../front-end/Profile.php">
                           Profile
                         </a>
                       </li>';
-                
-              }
-              elseif(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false){
-                echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="../front-end/login.php">Log in</a>
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
+              echo '<li class="nav-item cls mx-2">
+                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
                       </li>';
-                echo '<div class="dropstart cls">
+              echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="../upload_video.php">
+                          Update course
+                        </a>
+                      </li>';
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+              echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.php">Log in</a>
+                      </li>';
+              echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
                           <a class="dropdown-item active" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
-              }
-              else{
-                echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="../front-end/login.php">Log in</a>
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
+              echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
-                echo '<div class="dropstart cls">
+              echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
                           <a class="dropdown-item active" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
-              }
+            } else {
+              echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.php">Log in</a>
+                      </li>';
+              echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item active" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+            }
             ?>
         </div>
         </ul>
       </div>
       </div>
-      </nav>
+    </nav>
   </header>
 
   <?php if (isset($_SESSION['successMessage'])) : ?>

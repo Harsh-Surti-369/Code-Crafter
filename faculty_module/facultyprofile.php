@@ -2,7 +2,7 @@
 session_start();
 
 // Include your database connection
-require '../back-end/dbconnect.php';
+require '../public/back-end/dbconnect.php';
 
 // Check if the faculty is logged in
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] !== "faculty") {
@@ -26,7 +26,7 @@ if (mysqli_num_rows($facultyResult) === 1) {
 }
 
 // Update faculty details if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['update'])) {
     // Retrieve form data
     $newFullName = $_POST['fullname'];
     $newEmail = $_POST['email'];
@@ -51,6 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo '</div>';
     }
 }
+// Handle account deletion
+if (isset($_POST['delete'])) {
+  $deleteQuery = "DELETE FROM faculty WHERE fid= $fid";
+
+  if (mysqli_query($conn, $deleteQuery)) {
+      // Redirect to the logout page or any other page after successful deletion
+      header("Location: ../public/front-end/login.php");
+      exit();
+  } else {
+      echo '<div class="alert alert-danger" role="alert">';
+      echo 'Error deleting account: ' . mysqli_error($conn);
+      echo '</div>';
+  }
+}
 
 // Logout faculty
 if (isset($_POST['logout'])) {
@@ -70,8 +84,8 @@ if (isset($_POST['logout'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="CSS/headerfooter.css" />
-    <link rel="stylesheet" href="CSS/facultyprofile.css" />
+    <link rel="stylesheet" href="../Public/Front-end/CSS/headerfooter.css" />
+    <link rel="stylesheet" href="../Public/Front-end/CSS/facultyprofile.css" />
     <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
     <title>Faculty Profile</title>
 </head>
@@ -81,7 +95,7 @@ if (isset($_POST['logout'])) {
   <header class="sticky-top">
     <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
+        <a class="navbar-brand" href="index.html"><img src="../public/Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -89,17 +103,16 @@ if (isset($_POST['logout'])) {
         <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="../Front-end/home.php">Home</a>
+              <a class="nav-link" href="../public/Front-end/home.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="course.php">Courses</a>
+              <a class="nav-link" href="../public/course.php">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="whyus.php">Why We</a>
+              <a class="nav-link" href="../public/whyus.php">Why We</a>
             </li>
 
             <?php
-            session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
               echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
@@ -159,24 +172,13 @@ if (isset($_POST['logout'])) {
       </div>
     </nav>
   </header>
-    
-  <?php
-// Include the footer
-include('footer.php');
-
-    if (!($_SESSION['loggedin']=true && $_SESSION['role']='faculty')) {
-        $login = "../Front-end/index.php";
-        header("Location: ". $login);
-        exit();
-    }
-?>
 
 <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="profile-card">
                     <h2>Faculty Profile</h2>
-                    <form method="POST">
+                    <form method="POST" name="update">
                         <div class="mb-3">
                             <label for="fullname" class="form-label">Full Name</label>
                             <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo $faculty['fullname']; ?>">
@@ -187,7 +189,10 @@ include('footer.php');
                         </div>
                         <button type="submit" class="btn btn-primary">Update Profile</button>
                     </form>
-                    <form method="POST">
+                    <form action="facultyprofile.php" method="post" name="delete">
+                            <button type="submit" class="btn btn-danger" name="delete_account">Delete Account</button>
+                        </form>
+                    <form method="POST" name="logout">
                         <button type="submit" name="logout" class="btn btn-danger mt-3 logout-button">Logout</button>
                     </form>
                 </div>
@@ -195,8 +200,17 @@ include('footer.php');
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <?php
+// Include the footer
+include('footer.php');
+
+    if (!($_SESSION['loggedin']=true && $_SESSION['role']='faculty')) {
+        $login = "../Front-end/index.php";
+        header("Location: ". $login);
+        exit();
+    }
+?>
 
 </body>
 </html>

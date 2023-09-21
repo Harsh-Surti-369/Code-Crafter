@@ -53,11 +53,8 @@
             <?php
             session_start();
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="mycourse.php">My course</a>
-                      </li>';
               echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="Pofile.php">
+                        <a class="nav-link ls" href="Profile.php">
                           Profile
                         </a>
                       </li>';
@@ -145,11 +142,6 @@
         <div class="col-md-2 col-4 mb-3">
           <a href="#" class="achievement-company d-block">
             <img src="../Assets/images/duke-3.png" alt="Duke University Logo" class="img-fluid" />
-          </a>
-        </div>
-        <div class="col-md-2 col-4 mb-3">
-          <a href="#" class="achievement-company d-block">
-            <img src="../Assets/images/illinois-3.png" alt="University of Illinois Logo" class="img-fluid" />
           </a>
         </div>
         <div class="col-md-2 col-4 mb-3">

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="CSS/headerfooter.css" />
     <link rel="stylesheet" href="CSS/course_player.css" />
     <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
-    <title><?php echo $course['course_name']; ?> Video</title>
+    <title></title>
 
     <style>
         /* Add your custom CSS styles here */
@@ -70,7 +70,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
 
 <body>
     <?php
-    session_start();
     require '../back-end/dbconnect.php';
 
     if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
@@ -125,7 +124,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
                     <!-- Replace with dynamic data from your database -->
                     <?php
                     // Fetch other videos in the same course from the database
-                    $courseId = $course['id']; // Assuming 'id' is the primary key of the 'courses' table
+                    $courseId = $course['course_name']; // Assuming 'id' is the primary key of the 'courses' table
                     $otherVideosQuery = "SELECT * FROM courses WHERE id != $courseId AND fid = {$course['fid']}";
                     $otherVideosResult = mysqli_query($conn, $otherVideosQuery);
 

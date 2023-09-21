@@ -1,17 +1,3 @@
-<?php
-
-// Check if the user is trying to logout
-if (isset($_POST['logout'])) {
-    // Unset all session variables
-    session_unset();
-
-    // Destroy the session
-    session_destroy();
-
-    // Redirect to the current page to refresh it
-}
-?>
-
 
 <footer class="bg-light text-secondary">
     <div class="container py-5">
@@ -31,17 +17,11 @@ if (isset($_POST['logout'])) {
             </div>
             <div class="col-md-4">
                 <div class="d-flex flex-column align-items-center">
-                    <img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafter Logo" class="mb-3"
-                        style="max-width: 100px;">
+                 
                     <h3 class="mb-4">Contact Us</h3>
                     <p>Email: info@code-crafter.com</p>
                     <p>Phone: +123-456-7890</p>
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
-                        <!-- Add the Logout button -->
-                        <form method="post" action="footer.php">
-                            <button type="submit" class="btn btn-danger mt-3" name="logout">Logout</button>
-                        </form>
-                    <?php endif; ?>
+                  
                 </div>
             </div>
         </div>

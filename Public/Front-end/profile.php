@@ -17,9 +17,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
 
 // Get the student ID from the session (you can modify this based on your authentication logic)
 $sid = $_SESSION['sid'];
-
+// echo $sid;
 // Fetch student details based on the student ID
-$query = "SELECT * FROM student WHERE sid = $studentId";
+$query = "SELECT * FROM student WHERE sid = $sid";
 $result = mysqli_query($conn, $query);
 
 // Check if the student exists
@@ -54,7 +54,7 @@ if (isset($_POST['update_profile'])) {
 
 // Handle account deletion
 if (isset($_POST['delete_account'])) {
-    $deleteQuery = "DELETE FROM student WHERE sid=$studentId";
+    $deleteQuery = "DELETE FROM student WHERE sid= $sid";
 
     if (mysqli_query($conn, $deleteQuery)) {
         // Redirect to the logout page or any other page after successful deletion
@@ -69,16 +69,11 @@ if (isset($_POST['delete_account'])) {
 // Check if the user is logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // Destroy the session to log the user out
-    session_destroy();
+    // session_destroy();
 }
 
-// Redirect the user to the login page or any other desired page
-header("Location: login.php");
-exit(); // Stop further execution
 ?>
 
-mysqli_close($conn);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,96 +82,100 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <!-- Include your custom CSS styles here -->
+     <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <!-- bootstrap js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> <!-- Include your custom CSS styles here -->
+    <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css">
     <link rel="stylesheet" href="CSS/profile.css">
 </head>
 
 <body>
-    <header class="sticky-top">
-        <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<!-- header navbar -->
+<header class="sticky-top">
+    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="../Front-end/home.php">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="course.php">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="whyus.php">Why We</a>
-                        </li>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../Front-end/home.php">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="course.php">Courses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="whyus.php">Why We</a>
+            </li>
 
-                        <?php
-                        session_start();
-                        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
-                            echo '<li class="nav-item cls mx-2">
+            <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
+              echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="mycourse.php">My course</a>
                       </li>';
-                            echo '<li class="nav-item cls">
-                        <a class="nav-link ls active" href="Pofile.php">
+              echo '<li class="nav-item cls">
+                        <a class="nav-link ls active" href="Profile.php">
                           Profile
                         </a>
                       </li>';
-                        } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
-                            echo '<li class="nav-item cls mx-2">
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
+              echo '<li class="nav-item cls mx-2">
                       <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
                       </li>';
-                            echo '<li class="nav-item cls">
+              echo '<li class="nav-item cls">
                         <a class="nav-link ls" href="../upload_video.php">
                           Update course
                         </a>
                       </li>';
-                        } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
-                            echo '<li class= "nav-item cls mx-2">
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+              echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
-                            echo '<div class="dropstart cls">
+              echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
                           <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
-                        } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
-                            echo '<li class= "nav-item cls mx-2">
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
+              echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
-                            echo '<div class="dropstart cls">
+              echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
                           <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
-                        } else {
-                            echo '<li class= "nav-item cls mx-2">
+            } else {
+              echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
-                            echo '<div class="dropstart cls">
+              echo '<div class="dropstart cls">
                         <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
                         <ul class="dropdown-menu">
                           <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
                           <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
                         </ul>
                       </div>';
-                        }
-                        ?>
-                </div>
-                </ul>
-            </div>
-            </div>
-        </nav>
-    </header>
-
-
+            }
+            ?>
+        </div>
+        </ul>
+      </div>
+      </div>
+    </nav>
+  </header>
+  
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -185,12 +184,9 @@ mysqli_close($conn);
                         Student Profile
                     </div>
                     <div class="card-body">
-                        <!-- Display student details here -->
                         <h5>Student Details:</h5>
                         <p>Name: <?php echo $student['sname']; ?></p>
                         <p>Email: <?php echo $student['semail']; ?></p>
-
-                        <!-- Update Form -->
                         <form action="profile.php" method="post">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Student Name</label>
@@ -200,13 +196,8 @@ mysqli_close($conn);
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" value="<?php echo $student['semail']; ?>">
                             </div>
-
-                            <!-- Add more student details here -->
-
                             <button type="submit" class="btn btn-primary" name="update_profile">Update Profile</button>
                         </form>
-
-                        <!-- Delete Account Button -->
                         <form action="profile.php" method="post">
                             <button type="submit" class="btn btn-danger" name="delete_account">Delete Account</button>
                         </form>
@@ -218,8 +209,6 @@ mysqli_close($conn);
     <a href="logout.php">Logout</a>
 
 
-    <!-- Include Bootstrap JS (Optional) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

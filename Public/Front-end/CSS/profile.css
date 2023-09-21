@@ -1,4 +1,12 @@
-/* custom.css */
+/* Global Styles */
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+}
 
 /* Center the card vertically */
 .card {
@@ -49,4 +57,40 @@
 
 .btn-secondary:hover {
     background-color: #5a6268;
+}
+/* Profile Form Styles */
+.card-body {
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Logout Link */
+a[href="logout.php"] {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a[href="logout.php"]:hover {
+    text-decoration: underline;
 }
