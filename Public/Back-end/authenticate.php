@@ -20,9 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $student_data = $student_result->fetch_assoc();
         if ($lpswd == $student_data['pswd']) {
             // Set session variables to mark the user as logged in and as a student
-            $_SESSION['role'] = 'student';
             $_SESSION['loggedin'] = true;
-
+            $_SESSION['role'] = 'student';
+            $_SESSION['sid'] = $student_data['sid'];
+            // echo $_SESSION['sid'];
             // Redirect to the student dashboard or explore courses page
             header("Location: ../Front-end/home.php");
             exit();
@@ -32,8 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $faculty_data = $faculty_result->fetch_assoc();
         if ($lpswd == $faculty_data['fpswd']) {
             // Set session variables to mark the user as logged in and as a faculty
-            $_SESSION['role'] = 'faculty';
             $_SESSION['loggedin'] = true;
+            $_SESSION['role'] = 'faculty';
+            $_SESSION['fid'] = $faculty_data['fid'];
 
             // Redirect to the faculty dashboard or other appropriate page
             header("Location: ../../faculty_module/facultyprofile.php");
@@ -49,4 +51,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }  
 }
-?>

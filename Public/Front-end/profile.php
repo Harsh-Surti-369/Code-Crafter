@@ -16,7 +16,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
 }
 
 // Get the student ID from the session (you can modify this based on your authentication logic)
-$studentId = $_SESSION['student_id'];
+$sid = $_SESSION['sid'];
 
 // Fetch student details based on the student ID
 $query = "SELECT * FROM student WHERE sid = $studentId";
