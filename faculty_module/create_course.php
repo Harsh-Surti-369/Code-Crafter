@@ -12,20 +12,20 @@
       $courseName = $_POST['courseName'];
       $courseDesc = $_POST['courseDesc'];
 
-// Handle image and video uploads
-$introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
-$courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
+      // Handle image and video uploads
+      $introImageName = 'intro_' . time() . '_' . $_FILES['introImage']['name'];
+      $courseVideoName = 'video_' . time() . '_' . $_FILES['courseVideo']['name'];
 
-$introImagePath = '../uploads/' . $introImageName;
-$courseVideoPath = 'code-crafter/faculty_module/uploads/' . $courseVideoName;
+      $introImagePath = 'uploads/' . $introImageName;
+      $courseVideoPath = 'uploads/' . $courseVideoName;
 
-move_uploaded_file($_FILES['introImage']['tmp_name'], $introImagePath);
-move_uploaded_file($_FILES['courseVideo']['tmp_name'], $courseVideoPath);
+      move_uploaded_file($_FILES['introImage']['tmp_name'], $introImagePath);
+      move_uploaded_file($_FILES['courseVideo']['tmp_name'], $courseVideoPath);
 
-// Insert new course details into the database with file paths
-$insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
-                VALUES ('$courseName', '$courseDesc', '$introImagePath', '$courseVideoPath')";
-mysqli_query($conn, $insertQuery);
+      // Insert new course details into the database with file paths
+      $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
+                VALUES ('$courseName', '$courseDesc', '$introImageName', '$courseVideoName')";
+      mysqli_query($conn, $insertQuery);
 
 
       // Redirect to the course intro page or a suitable location
@@ -59,41 +59,41 @@ mysqli_query($conn, $insertQuery);
  </head>
 
  <body>
-  
- <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="course-card">
-                    <h1>Create Course</h1>
-                    <form action="create_course.php" method="post" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="courseName" class="form-label">Course Name:</label>
-                            <input type="text" id="courseName" name="courseName" class="form-control" required>
-                        </div>
 
-                        <div class="mb-3">
-                            <label for="courseDesc" class="form-label">Course Description:</label>
-                            <textarea id="courseDesc" name="courseDesc" rows="2" class="form-control" required></textarea>
-                        </div>
+   <div class="container">
+     <div class="row">
+       <div class="col-md-6 offset-md-3">
+         <div class="course-card">
+           <h1>Create Course</h1>
+           <form action="create_course.php" method="post" enctype="multipart/form-data">
+             <div class="mb-3">
+               <label for="courseName" class="form-label">Course Name:</label>
+               <input type="text" id="courseName" name="courseName" class="form-control" required>
+             </div>
 
-                        <div class="mb-3">
-                            <label for="introImage" class="form-label">Intro Image:</label>
-                            <input type="file" id="introImage" name="introImage" accept="image/*" class="form-control" required>
-                        </div>
+             <div class="mb-3">
+               <label for="courseDesc" class="form-label">Course Description:</label>
+               <textarea id="courseDesc" name="courseDesc" rows="2" class="form-control" required></textarea>
+             </div>
 
-                        <div class="mb-3">
-                            <label for="courseVideo" class="form-label">Course Video:</label>
-                            <input type="file" id="courseVideo" name="courseVideo" accept="video/*" class="form-control" required>
-                        </div>
+             <div class="mb-3">
+               <label for="introImage" class="form-label">Intro Image:</label>
+               <input type="file" id="introImage" name="introImage" accept="image/*" class="form-control" required>
+             </div>
 
-                        <label class="file-input-label">Upload a high-quality image and video for your course.</label>
+             <div class="mb-3">
+               <label for="courseVideo" class="form-label">Course Video:</label>
+               <input type="file" id="courseVideo" name="courseVideo" accept="video/*" class="form-control" required>
+             </div>
 
-                        <button type="submit" class="btn btn-create-course">Create Course</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+             <label class="file-input-label">Upload a high-quality image and video for your course.</label>
+
+             <button type="submit" class="btn btn-create-course">Create Course</button>
+           </form>
+         </div>
+       </div>
+     </div>
+   </div>
  </body>
 
  </html>

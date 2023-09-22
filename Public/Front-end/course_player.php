@@ -118,26 +118,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
                 <!-- Course Description (Dynamic) -->
                 <p><?php echo $course['description']; ?></p>
 
-                <!-- List of Other Videos in This Course (Dynamic) -->
-                <h5>Other Videos in This Course</h5>
-                <ul class="list-group">
-                    <!-- Replace with dynamic data from your database -->
-                    <?php
-                    // Fetch other videos in the same course from the database
-                    $courseId = $course['course_name']; // Assuming 'id' is the primary key of the 'courses' table
-                    $otherVideosQuery = "SELECT * FROM courses WHERE id != $courseId AND fid = {$course['fid']}";
-                    $otherVideosResult = mysqli_query($conn, $otherVideosQuery);
-
-                    if (mysqli_num_rows($otherVideosResult) === 0) {
-                        echo '<p>No more videos in this course</p>';
-                    } else {
-                        while ($otherVideo = mysqli_fetch_assoc($otherVideosResult)) {
-                            echo '<li class="list-group-item"><a href="course_player.php?course_name=' . urlencode($otherVideo['course_name']) . '">' . $otherVideo['course_name'] . '</a></li>';
-                        }
-                    }
-                    ?>
-                </ul>
-
                 <!-- Button to Go Back to All Courses -->
                 <a href="course.php" class="btn btn-primary mt-3">Back to All Courses</a>
             </div>

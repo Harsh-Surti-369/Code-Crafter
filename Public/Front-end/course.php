@@ -53,17 +53,33 @@ require '../back-end/dbconnect.php';
             </li>
 
             <?php
-
-            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="mycourse.php">My course</a>
-                      </li>';
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
               echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="profile.php">
+                        <a class="nav-link ls" href="Profile.php">
                           Profile
                         </a>
                       </li>';
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
+              echo '<li class="nav-item cls mx-2">
+                      <a class="nav-link ls" href="`../../faculty_module/create_course.php">Create course</a>
+                      </li>';
+              echo '<li class="nav-item cls">
+                        <a class="nav-link ls" href="../../faculty_module/upload_video.php">
+                          Update course
+                        </a>
+                      </li>';
             } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
+              echo '<li class= "nav-item cls mx-2">
+                        <a class="nav-link ls" href="login.php">Log in</a>
+                      </li>';
+              echo '<div class="dropstart cls">
+                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
+                        <ul class="dropdown-menu">
+                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
+                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
+                        </ul>
+                      </div>';
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
               echo '<li class= "nav-item cls mx-2">
                         <a class="nav-link ls" href="login.php">Log in</a>
                       </li>';
@@ -113,11 +129,11 @@ require '../back-end/dbconnect.php';
           while ($course = mysqli_fetch_assoc($coursesResult)) {
             // Retrieve faculty information based on 'fid'
             $fid = $course['fid'];
-            $facultyQuery = "SELECT * FROM faculty WHERE fid = $fid";
+            $facultyQuery = "SELECT * FROM `faculty` WHERE fid = '$fid'";
             $facultyResult = mysqli_query($conn, $facultyQuery);
 
             if (!$facultyResult) {
-              echo "Error in faculty query: " . mysqli_error($conn);
+              echo "Error in faculty query: ";
             } else {
               $faculty = mysqli_fetch_assoc($facultyResult);
 
@@ -125,19 +141,20 @@ require '../back-end/dbconnect.php';
         ?>
               <div class="col-md-4">
                 <div class="course-card">
-                  <?php
-                  $imageType = 'jpg';
-                  $base64Image = base64_encode($course['intro_image']);
-
-                  // Create a data URI for the image
-                  $dataURI = "data:$imageType;base64,$base64Image";
-                  ?>
-                  <img src="<?php echo $dataURI; ?>" class="img-fluid mb-3" alt="Course Image">
+                  
+                  <img src="../../faculty_module/uploads/ <?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
                   <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
                   <p class="card-text"><?php echo $course['description']; ?></p>
-                  <p class="faculty-name">Faculty: <?php echo $faculty['fullname']; ?></p>
+                  <p class="faculty-name">
+                    <?php
+                    if (isset($faculty['fullname'])) {
+                      echo $faculty['fullname'];
+                    } else {
+                    }
+                    ?>
+                  </p>
                   <div class="buttons">
-                    <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-secondary">Learn</a>
+                    <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-outline-warning">Learn</a>
                   </div>
                 </div>
               </div>
@@ -148,74 +165,11 @@ require '../back-end/dbconnect.php';
         ?>
       </div>
     </section>
-
-    <!-- Section 2: Most Viewed Courses -->
-    <section class="mb-5 alt">
-      <h2>Most Viewed Courses</h2>
-      <div class="row">
-        <?php
-        // Fetch courses from the database based on your criteria
-        $query = "SELECT * FROM courses ORDER BY views DESC LIMIT 3"; // Change the limit as needed
-        $result = mysqli_query($conn, $query);
-
-        if (!$result) {
-          echo '<div class="alert alert-danger" role="alert">';
-          echo 'Error fetching most viewed courses: ' . mysqli_error($conn);
-          echo '</div>';
-        } else {
-          while ($course = mysqli_fetch_assoc($result)) {
-            // Retrieve faculty information based on the faculty_id
-            $facultyId = $course['fid'];
-            $facultyQuery = "SELECT * FROM faculty WHERE fid = $facultyId";
-            $facultyResult = mysqli_query($conn, $facultyQuery);
-            $faculty = mysqli_fetch_assoc($facultyResult);
-        ?>
-            <div class="col-md-4">
-              <div class="course-card">
-                <img src="<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
-                <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
-                <p class="card-text"><?php echo $course['description']; ?></p>
-                <p class="faculty-name">Faculty: <?php echo $faculty['fullname']; ?></p>
-                <div class="buttons">
-                  <a href="#" class="btn btn-secondary">Learn More</a>
-                </div>
-              </div>
-            </div>
-        <?php
-          }
-        }
-        ?>
-      </div>
-    </section>
-
-
-    <!-- Section 4: Courses Filtered by Faculty -->
-    <section class="mb-5 alt">
-      <h2>Courses by Faculty</h2>
-      <div class="dropdown mb-3">
-        <button class="btn btn-success dropdown-toggle" type="button" id="facultyDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Select Faculty
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="facultyDropdown">
-          <li><a class="dropdown-item" href="#">Faculty 1</a></li>
-          <li><a class="dropdown-item" href="#">Faculty 2</a></li>
-          <!-- Add more faculty options as needed -->
-        </ul>
-      </div>
-  </div>
-  <div class="row">
-    <!-- Display filtered course cards here -->
-  </div>
-  </section>
   </div>
 
   <!-- footer -->
   <?php include "../Back-end/footer.php"; ?>
 
-  <!-- Include your JavaScript scripts here if needed -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

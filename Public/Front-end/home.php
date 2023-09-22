@@ -60,7 +60,7 @@
                       </li>';
             } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
               echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
+                      <a class="nav-link ls" href="`../../faculty_module/create_course.php">Create course</a>
                       </li>';
               echo '<li class="nav-item cls">
                         <a class="nav-link ls" href="../upload_video.php">
