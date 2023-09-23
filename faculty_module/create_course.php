@@ -1,6 +1,7 @@
  <?php
   session_start();
-
+  $fid = $_SESSION['fid'];
+  // echo $fid;
   require '../public/back-end/dbconnect.php';
 
   if ($_SESSION['loggedin'] === false) {
@@ -23,8 +24,8 @@
       move_uploaded_file($_FILES['courseVideo']['tmp_name'], $courseVideoPath);
 
       // Insert new course details into the database with file paths
-      $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video) 
-                VALUES ('$courseName', '$courseDesc', '$introImageName', '$courseVideoName')";
+      $insertQuery = "INSERT INTO courses (course_name, description, intro_image, course_video, fid) 
+                VALUES ('$courseName', '$courseDesc', '$introImageName', '$courseVideoName' , $fid)";
       mysqli_query($conn, $insertQuery);
 
 
@@ -60,6 +61,7 @@
 
  <body>
 
+ <?php include 'header.php'; ?>
    <div class="container">
      <div class="row">
        <div class="col-md-6 offset-md-3">

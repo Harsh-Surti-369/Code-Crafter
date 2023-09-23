@@ -15,162 +15,172 @@
 </head>
 
 <body>
-<?php
-session_start();
-require '../public/back-end/dbconnect.php';
+  <?php
+  session_start();
+  require '../public/back-end/dbconnect.php';
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
-  // Display an alert message using Bootstrap classes
-  echo '<div class="alert alert-danger" role="alert">';
-  echo '<h2 class="alert-heading">Login Required</h2>';
-  echo '<p>Login first to access your profile.</p>';
-  echo '<a class="btn btn-primary custom-login-button" href="../public/front-end/login.php">Log in</a>';
-  echo '</div>';
-  exit(); // Stop further execution
-}
-
-// Get faculty details based on session data
-$fid = $_SESSION['fid'];
-// echo $fid;
-$facultyQuery = "SELECT * FROM faculty WHERE fid = $fid";
-$facultyResult = mysqli_query($conn, $facultyQuery);
-
-// Check if the faculty record exists
-if (mysqli_num_rows($facultyResult) === 1) {
-  $faculty = mysqli_fetch_assoc($facultyResult);
-} else {
-  // Handle the case where the faculty record doesn't exist
-  echo "Faculty not found.";
-  exit();
-}
-
-// Update faculty details if the form is submitted
-if (isset($_POST['update_profile'])) {
-  $newFullName = $_POST['fullname'];
-  $newEmail = $_POST['email'];
-
-  // Update faculty information in the database
-  $updateQuery = "UPDATE faculty SET fullname = '$newFullName', femail = '$newEmail' WHERE fid = $fid";
-
-  if (mysqli_query($conn,$updateQuery)) {
-    echo '<div class="alert alert-success" role="alert">';
-    echo 'Profile updated successfully';
-    echo '</div>';
-    $faculty['fullname'] = $newFullName;
-    $faculty['femail'] = $newEmail;
-  } else {
-    // Handle the update error
+  if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
+    // Display an alert message using Bootstrap classes
     echo '<div class="alert alert-danger" role="alert">';
-    echo 'Error updating faculty information: ';
+    echo '<h2 class="alert-heading">Login Required</h2>';
+    echo '<p>Login first to access your profile.</p>';
+    echo '<a class="btn btn-primary custom-login-button" href="../public/front-end/login.php">Log in</a>';
     echo '</div>';
+    exit(); // Stop further execution
   }
-}
 
-// Handle account deletion
-if (isset($_POST['delete_profile'])) {
-  $deleteQuery = "DELETE FROM faculty WHERE fid= $fid";
+  // Get faculty details based on session data
+  $fid = $_SESSION['fid'];
+  // echo $fid;
+  $facultyQuery = "SELECT * FROM faculty WHERE fid = $fid";
+  $facultyResult = mysqli_query($conn, $facultyQuery);
 
-  if (mysqli_query($conn, $deleteQuery)) {
-    // Redirect to the logout page or any other page after successful deletion
-    header("Location: ../public/front-end/login.php");
+  // Check if the faculty record exists
+  if (mysqli_num_rows($facultyResult) === 1) {
+    $faculty = mysqli_fetch_assoc($facultyResult);
+  } else {
+    // Handle the case where the faculty record doesn't exist
+    echo "Faculty not found.";
     exit();
-  } else {
-    echo '<div class="alert alert-danger" role="alert">';
-    echo 'Error deleting account: ';
-    echo '</div>';
   }
-}
 
-// Logout faculty
-if (isset($_POST['logout'])) {
-  session_unset();
-  session_destroy();
-  header("Location: login.php");
-  exit();
-}
-?>
-  <!-- header navbar -->
-  <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../public/Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+  // Update faculty details if the form is submitted
+  if (isset($_POST['update_profile'])) {
+    $newFullName = $_POST['fullname'];
+    $newEmail = $_POST['email'];
 
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="../public/Front-end/home.php">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../public/Front-end/course.php">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="../public/Front-end/whyus.php">Why We</a>
-            </li>
+    // Update faculty information in the database
+    $updateQuery = "UPDATE faculty SET fullname = '$newFullName', femail = '$newEmail' WHERE fid = $fid";
 
-            <?php
-            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="mycourse.php">My course</a>
-                      </li>';
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="Pofile.php">
-                          Profile
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
-                      </li>';
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="../upload_video.php">
-                          Update course
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } else {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            }
-            ?>
+    if (mysqli_query($conn, $updateQuery)) {
+      echo '<div class="alert alert-success" role="alert">';
+      echo 'Profile updated successfully';
+      echo '</div>';
+      $faculty['fullname'] = $newFullName;
+      $faculty['femail'] = $newEmail;
+    } else {
+      // Handle the update error
+      echo '<div class="alert alert-danger" role="alert">';
+      echo 'Error updating faculty information: ';
+      echo '</div>';
+    }
+  }
+
+  // Handle account deletion
+  if (isset($_POST['delete_profile'])) {
+    $deleteQuery = "DELETE FROM faculty WHERE fid= $fid";
+
+    if (mysqli_query($conn, $deleteQuery)) {
+      // Redirect to the logout page or any other page after successful deletion
+      header("Location: ../public/front-end/login.php");
+      exit();
+    } else {
+      echo '<div class="alert alert-danger" role="alert">';
+      echo 'Error deleting account: ';
+      echo '</div>';
+    }
+  }
+  // Logout faculty
+  if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit();
+  }
+
+  // Initialize $searchQuery
+  $searchQuery = "";
+
+  if (isset($_GET['search_query'])) {
+    $fid = $_SESSION['fid'];
+
+    // Replace 'YOUR_SEARCH_QUERY' with the search query entered by the faculty
+    $searchQuery = mysqli_real_escape_string($conn, $_GET['search_query']);
+
+    // Construct the SQL query
+    $coursesQuery = "SELECT * FROM courses
+                    WHERE fid = $fid 
+                    AND (course_name LIKE '%$searchQuery%' OR description LIKE '%$searchQuery%')";
+
+    // Execute the search query
+    $coursesResult = mysqli_query($conn, $coursesQuery);
+  }
+  ?>
+
+<?php include 'header.php';?>
+
+  <!-- Add the search form here -->
+  <form method="GET" action="facultyprofile.php">
+    <div class="mb-3">
+      <input type="text" name="search_query" placeholder="Search your courses">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+
+  <!-- Display Searched Courses -->
+  <h5>Your Courses:</h5>
+  <?php
+  if (isset($coursesResult)) {
+    while ($course = mysqli_fetch_assoc($coursesResult)) {
+  ?>
+      <div class="faculty-course">
+        <h6><?php echo $course['course_name']; ?></h6>
+        <p><?php echo $course['description']; ?></p>
+        <img src="../uploads/<?php echo $course['intro_image']; ?>" alt="Course Image" class="course-image" />
+
+        <!-- Update Button to Open Modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateCourseModal<?php echo $course['course_name']; ?>">Update</button>
+
+        <!-- Delete Form Button -->
+        <form method="POST" class="delete-form">
+          <input type="hidden" name="course_name" value="<?php echo $course['course_name']; ?>">
+          <button name="delete_course" type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+
+      <!-- Update Course Modal -->
+      <div class="modal fade" id="updateCourseModal<?php echo $course['course_name']; ?>" tabindex="-1" role="dialog" aria-labelledby="updateCourseModalLabel<?php echo $course['course_name']; ?>" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="updateCourseModalLabel<?php echo $course['course_name']; ?>">Update Course</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <!-- Update Course Form -->
+            <form action="update_course.php" method="post" enctype="multipart/form-data">
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="updateCourseName" class="form-label">Course Name:</label>
+                  <input type="text" id="updateCourseName" name="updateCourseName" class="form-control" value="<?php echo $course['course_name']; ?>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="updateCourseDesc" class="form-label">Course Description:</label>
+                  <textarea id="updateCourseDesc" name="updateCourseDesc" rows="2" class="form-control" required><?php echo $course['description']; ?></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="updateIntroImage" class="form-label">Intro Image:</label>
+                  <input type="file" id="updateIntroImage" name="updateIntroImage" accept="image/*" class="form-control">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </div>
         </div>
-        </ul>
       </div>
-      </div>
-    </nav>
-  </header>
+  <?php
+    }
+  } else {
+    echo '<p>No courses found.</p>';
+  }
+  ?>
 
+  <!-- profile -->
   <div class="container my-4">
     <div class="row">
       <div class="col-md-6 offset-md-3">
@@ -202,6 +212,11 @@ if (isset($_POST['logout'])) {
       </div>
     </div>
   </div>
+
+  <!-- Add these script imports at the end of your HTML body -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

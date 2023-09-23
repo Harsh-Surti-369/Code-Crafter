@@ -105,7 +105,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSIO
             <div class="col-md-8 video-container">
                 <!-- Video Player -->
                 <video controls width="100%">
-                    <source src="<?php echo $videoPath; ?>" type="video/mp4">
+                    <source src="../../faculty_module/<?php echo $videoPath; ?>" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>

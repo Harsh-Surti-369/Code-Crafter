@@ -136,23 +136,20 @@ require '../back-end/dbconnect.php';
               echo "Error in faculty query: ";
             } else {
               $faculty = mysqli_fetch_assoc($facultyResult);
-
-              // Display the course card with the image and faculty information
         ?>
               <div class="col-md-4">
                 <div class="course-card">
-                  
-                  <img src="../../faculty_module/uploads/ <?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
+                  <img src="../../faculty_module/uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
                   <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
                   <p class="card-text"><?php echo $course['description']; ?></p>
-                  <p class="faculty-name">
+                  <b><i class="faculty-name">
                     <?php
                     if (isset($faculty['fullname'])) {
                       echo $faculty['fullname'];
                     } else {
                     }
                     ?>
-                  </p>
+                  </i><b>
                   <div class="buttons">
                     <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-outline-warning">Learn</a>
                   </div>
