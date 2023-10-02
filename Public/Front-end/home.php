@@ -29,7 +29,9 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="dalertbtn"></button>
   </div>
 
-<?php include '../Back-end/header.php'; ?>
+<?php
+  session_start();
+include '../Back-end/header.php'; ?>
 
   <!-- herosection -->
   <section class="hero-section">

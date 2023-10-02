@@ -14,6 +14,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> <!-- Include your custom CSS styles here -->
   <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css">
   <link rel="stylesheet" href="../Front-end/CSS/facultyprofile.css">
+  <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
+
 </head>
 
 <body>

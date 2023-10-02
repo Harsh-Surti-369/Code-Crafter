@@ -2,7 +2,7 @@
   <header class="sticky-top">
     <nav class="navbar navbar-expand-lg p-1 mb-1 bg-light bg-gradient text-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="C:\xampp1\htdocs\Code-Crafter\Public\Assets\images\logo\cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
+        <a class="navbar-brand" href="index.html"><img src="../Public/Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

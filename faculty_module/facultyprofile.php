@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../Public/Front-end/CSS/headerfooter.css" />
   <link rel="stylesheet" href="../Public/Front-end/CSS/facultyprofile.css" />
-  <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
+  <link rel="shortcut icon" href="../public/Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
   <title>Faculty Profile</title>
 </head>
 
@@ -87,98 +87,96 @@
     header("Location: login.php");
     exit();
   }
-
-  // Initialize $searchQuery
-  $searchQuery = "";
-
-  if (isset($_GET['search_query'])) {
-    $fid = $_SESSION['fid'];
-
-    // Replace 'YOUR_SEARCH_QUERY' with the search query entered by the faculty
-    $searchQuery = mysqli_real_escape_string($conn, $_GET['search_query']);
-
-    // Construct the SQL query
-    $coursesQuery = "SELECT * FROM courses
-                    WHERE fid = $fid 
-                    AND (course_name LIKE '%$searchQuery%' OR description LIKE '%$searchQuery%')";
-
-    // Execute the search query
-    $coursesResult = mysqli_query($conn, $coursesQuery);
-  }
   ?>
 
-<?php include 'header.php';?>
-
-  <!-- Add the search form here -->
-  <form method="GET" action="facultyprofile.php">
-    <div class="mb-3">
-      <input type="text" name="search_query" placeholder="Search your courses">
-      <button type="submit">Search</button>
-    </div>
-  </form>
-
-  <!-- Display Searched Courses -->
-  <h5>Your Courses:</h5>
+  <?php include 'header.php'; ?>
   <?php
-  if (isset($coursesResult)) {
-    while ($course = mysqli_fetch_assoc($coursesResult)) {
-  ?>
-      <div class="faculty-course">
-        <h6><?php echo $course['course_name']; ?></h6>
-        <p><?php echo $course['description']; ?></p>
-        <img src="../uploads/<?php echo $course['intro_image']; ?>" alt="Course Image" class="course-image" />
+$searchQuery = "";
+$query = "";
 
-        <!-- Update Button to Open Modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateCourseModal<?php echo $course['course_name']; ?>">Update</button>
+if (isset($_GET['search_query'])) {
+    $searchQuery = $_GET["search_query"];
+    $query = "SELECT * FROM courses WHERE fid = $fid AND (course_name LIKE '%$searchQuery%' OR description LIKE '%$searchQuery%')";
+}
 
-        <!-- Delete Form Button -->
-        <form method="POST" class="delete-form">
-          <input type="hidden" name="course_name" value="<?php echo $course['course_name']; ?>">
-          <button name="delete_course" type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
-
-      <!-- Update Course Modal -->
-      <div class="modal fade" id="updateCourseModal<?php echo $course['course_name']; ?>" tabindex="-1" role="dialog" aria-labelledby="updateCourseModalLabel<?php echo $course['course_name']; ?>" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="updateCourseModalLabel<?php echo $course['course_name']; ?>">Update Course</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <!-- Update Course Form -->
-            <form action="update_course.php" method="post" enctype="multipart/form-data">
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="updateCourseName" class="form-label">Course Name:</label>
-                  <input type="text" id="updateCourseName" name="updateCourseName" class="form-control" value="<?php echo $course['course_name']; ?>" required>
-                </div>
-                <div class="mb-3">
-                  <label for="updateCourseDesc" class="form-label">Course Description:</label>
-                  <textarea id="updateCourseDesc" name="updateCourseDesc" rows="2" class="form-control" required><?php echo $course['description']; ?></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="updateIntroImage" class="form-label">Intro Image:</label>
-                  <input type="file" id="updateIntroImage" name="updateIntroImage" accept="image/*" class="form-control">
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-  <?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["delete_course"])) {
+        $courseNameToDelete = $_POST["course_name"];
+        $deleteQuery = "DELETE FROM courses WHERE course_name = '$courseNameToDelete'";
+        
+        if (mysqli_query($conn, $deleteQuery)) {
+            // Course deleted successfully
+            $successMessage = "Course deleted successfully.";
+        } else {
+            // Error occurred during deletion
+            $errorMessage = "Error: " . mysqli_error($conn);
+        }
     }
-  } else {
-    echo '<p>No courses found.</p>';
-  }
-  ?>
+}
+?>
+
+<div class="container mt-5">
+    <h1 class="display-4 mb-4">Course Management</h1>
+
+    <!-- Search Box -->
+    <form class="mb-4" method="GET">
+        <div class="input-group">
+            <input type="text" class="form-control" name="search_query" placeholder="Search for courses">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <?php
+    if (!empty($query)) {
+        $result = mysqli_query($conn, $query); // Execute the query
+
+        if ($result !== false) {
+            if (mysqli_num_rows($result) > 0) {
+                ?>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<tr>';
+                            echo '<td>' . $row["course_name"] . '</td>';
+                            echo '<td>' . $row["description"] . '</td>';
+                            echo '<td>';
+                            echo '<a href="update_course.php?course_name=' . $row["course_name"] . '" class="btn btn-primary">Update</a>';
+                            echo '<form method="POST" style="display: inline;">';
+                            echo '<input type="hidden" name="course_name" value="' . $row["course_name"] . '">';
+                            echo '<button type="submit" name="delete_course" class="btn btn-danger my-3">Delete</button>';
+                            echo '</form>';
+                            echo '</td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <?php
+            } elseif ($searchQuery) {
+                echo "No courses found.";
+            }
+        } else {
+            echo "Error executing the query: " . mysqli_error($conn);
+        }
+    }
+
+    if (isset($successMessage)) {
+        echo '<div class="alert alert-success">' . $successMessage . '</div>';
+    } elseif (isset($errorMessage)) {
+        echo '<div class="alert alert-danger">' . $errorMessage . '</div>';
+    }
+    ?>
+</div>
+
+
 
   <!-- profile -->
   <div class="container my-4">
@@ -217,6 +215,21 @@
   <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
+
+  <script>
+    setTimeout(function() {
+      var successMessage = document.getElementById('successMessage');
+      var errorMessage = document.getElementById('errorMessage');
+
+      if (successMessage) {
+        successMessage.style.display = 'none';
+      }
+
+      if (errorMessage) {
+        errorMessage.style.display = 'none';
+      }
+    }, 3000); // Hide messages after 5 seconds (adjust the delay as needed)
+  </script>
 </body>
 
 </html>
