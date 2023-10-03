@@ -12,7 +12,7 @@
   <!-- bootstrap js -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> <!-- Include your custom CSS styles here -->
-  <link rel="stylesheet" href="../Front-end/CSS/headerfooter.css">
+  <link rel="stylesheet" href="CSS/headerfooter.css">
   <link rel="stylesheet" href="../Front-end/CSS/facultyprofile.css">
   <link rel="shortcut icon" href="../Assets/images/logo/cODE cRAFT lOGO.jpg" type="image/x-icon" />
 
@@ -23,15 +23,9 @@
 session_start();
 require '../Back-end/dbconnect.php';
 
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] === false || $_SESSION['role'] === "guest") {
-  // Display an alert message using Bootstrap classes
-  echo '<div class="alert alert-danger" role="alert">';
-  echo '<h2 class="alert-heading">Login Required</h2>';
-  echo '<p>Login first to access your profile.</p>';
-  echo '<a class="btn btn-primary custom-login-button" href="login.php">Log in</a>';
-  echo '</div>';
-  exit(); // Stop further execution
-}
+include '../back-end/auth_login.php';
+
+checkLogin();
 
 // Get the student ID from the session (you can modify this based on your authentication logic)
 $sid = $_SESSION['sid'];
@@ -91,90 +85,9 @@ if (isset($_POST['logout'])) {
   header("Location: login.php");
   exit();
 }
-
+include '../Back-end/header.php';
 ?>
 
-<!-- header navbar -->
-  <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="../Front-end/home.php">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="course.php">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="whyus.php">Why We</a>
-            </li>
-
-            <?php
-            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="mycourse.php">My course</a>
-                      </li>';
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls active" href="Profile.php">
-                          Profile
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="../faculty_module/create_course.php">Create course</a>
-                      </li>';
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="../upload_video.php">
-                          Update course
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } else {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            }
-            ?>
-        </div>
-        </ul>
-      </div>
-      </div>
-    </nav>
-  </header>
 
   <div class="container my-4">
     <div class="row">

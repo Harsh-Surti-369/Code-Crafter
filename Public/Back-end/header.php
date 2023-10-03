@@ -1,5 +1,5 @@
 <!-- header navbar -->
-  <header class="sticky-top">
+<header class="sticky-top">
     <nav class="navbar navbar-expand-lg p-1 mb-1 bg-light bg-gradient text-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>

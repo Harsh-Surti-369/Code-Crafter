@@ -25,7 +25,7 @@
   <!-- dismissable alert -->
   <div class="alert alert-primary alert-dismissible fade show" role="alert" id="dalert">
     <strong>Unleash your IT potential! Master tech skills with our online courses -
-      Enroll now and embrace success!</strong>
+      Enroll now and embrace success!</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="dalertbtn"></button>
   </div>
 

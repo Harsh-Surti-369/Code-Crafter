@@ -1,10 +1,8 @@
 <?php
 session_start();
-if (isset($SESSION['loggedin']) && $SESSION['loggedin'] == false) {
-  echo "<h2>Login first to access courses</h>";
-  echo "<a class='ls' href='login.php'>Log in</a>";
-}
-require '../back-end/dbconnect.php';
+include '../Back-end/dbconnect.php';
+include '../Back-end/auth_login.php';
+checkLogin();
 
 ?>
 <!DOCTYPE html>
@@ -30,139 +28,71 @@ require '../back-end/dbconnect.php';
 </head>
 
 <body>
-
-  <!-- header navbar -->
-  <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg p-2 mb-2 bg-light bg-gradient text-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"><img src="../Assets/images/logo/cODE cRAFT lOGO.jpg" alt="Code-Crafetr" class="logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="../Front-end/home.php">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="course.php">Courses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="whyus.php">Why We</a>
-            </li>
-
-            <?php
-            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'student') {
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="Profile.php">
-                          Profile
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true  && $_SESSION['role'] == 'faculty') {
-              echo '<li class="nav-item cls mx-2">
-                      <a class="nav-link ls" href="`../../faculty_module/create_course.php">Create course</a>
-                      </li>';
-              echo '<li class="nav-item cls">
-                        <a class="nav-link ls" href="../../faculty_module/upload_video.php">
-                          Update course
-                        </a>
-                      </li>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false) {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == false && $_SESSION['role'] == 'guest') {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            } else {
-              echo '<li class= "nav-item cls mx-2">
-                        <a class="nav-link ls" href="login.php">Log in</a>
-                      </li>';
-              echo '<div class="dropstart cls">
-                        <button type="button" class="btn dropdown-toggle ls" data-bs-toggle="dropdown">Sign Up</button>
-                        <ul class="dropdown-menu">
-                          <a class="dropdown-item" href="../Back-end/student.signup.php">Sign Up as Student</a>
-                          <a class="dropdown-item" href="../Back-end/teacher.signup.php">Sign Up as Faculty</a>
-                        </ul>
-                      </div>';
-            }
-            ?>
-        </div>
-        </ul>
-      </div>
-      </div>
-    </nav>
-  </header>
-
-  <div class="container mt-5">
+  <?php 
+  include '../Back-end/header.php';
+  ?>
+ <div class="container mt-5">
     <h1 class="mb-4">Explore Courses</h1>
 
     <!-- Section 1: Newly Arrived Courses -->
     <section class="mb-5">
-      <h2>Newly Arrived Courses</h2>
-      <div class="row">
-        <?php
-        // Retrieve course information from the database
-        $coursesQuery = "SELECT * FROM courses";
-        $coursesResult = mysqli_query($conn, $coursesQuery);
+        <h2>Newly Arrived Courses</h2>
+        <div class="row">
+            <?php
+            // Retrieve course information from the database
+            $coursesQuery = "SELECT * FROM courses";
+            $coursesResult = mysqli_query($conn, $coursesQuery);
 
-        if (!$coursesResult) {
-          // Handle the query error for courses
-          echo "Error: " . mysqli_error($conn);
-        } else {
-          while ($course = mysqli_fetch_assoc($coursesResult)) {
-            // Retrieve faculty information based on 'fid'
-            $fid = $course['fid'];
-            $facultyQuery = "SELECT * FROM `faculty` WHERE fid = '$fid'";
-            $facultyResult = mysqli_query($conn, $facultyQuery);
-
-            if (!$facultyResult) {
-              echo "Error in faculty query: ";
+            if (!$coursesResult) {
+                // Handle the query error for courses
+                echo "Error: " . mysqli_error($conn);
             } else {
-              $faculty = mysqli_fetch_assoc($facultyResult);
-        ?>
-              <div class="col-md-4">
-                <div class="course-card">
-                  <img src="../../faculty_module/uploads/<?php echo $course['intro_image']; ?>" class="img-fluid mb-3" alt="Course Image">
-                  <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
-                  <p class="card-text"><?php echo $course['description']; ?></p>
-                  <b><i class="faculty-name">
-                    <?php
-                    if (isset($faculty['fullname'])) {
-                      echo $faculty['fullname'];
+                $courseCount = 0; // Track the number of courses in the current row
+                while ($course = mysqli_fetch_assoc($coursesResult)) {
+                    // Retrieve faculty information based on 'fid'
+                    $fid = $course['fid'];
+                    $facultyQuery = "SELECT * FROM `faculty` WHERE fid = '$fid'";
+                    $facultyResult = mysqli_query($conn, $facultyQuery);
+
+                    if (!$facultyResult) {
+                        echo "Error in faculty query: ";
                     } else {
+                        $faculty = mysqli_fetch_assoc($facultyResult);
+
+                        // Create a new row if the current row is full (maximum 3 courses per row)
+                        if ($courseCount % 3 == 0) {
+                            echo '</div><div class="row">';
+                        }
+            ?>
+                        <div class="col-md-4">
+                            <div class="course-card card mb-4">
+                                <img src="../../faculty_module/uploads/<?php echo $course['intro_image']; ?>" class="card-img-top" alt="Course Image">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $course['course_name']; ?></h5>
+                                    <p class="card-text"><?php echo $course['description']; ?></p>
+                                    <b><i class="faculty-name">
+                                            <?php
+                                            if (isset($faculty['fullname'])) {
+                                                echo $faculty['fullname'];
+                                            }
+                                            ?>
+                                        </i><b>
+                                            <div class="buttons">
+                                                <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-outline-warning">Learn</a>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+            <?php
+                        $courseCount++;
                     }
-                    ?>
-                  </i><b>
-                  <div class="buttons">
-                    <a href="course_player.php?course_name=<?php echo urlencode($course['course_name']); ?>" class="btn btn-outline-warning">Learn</a>
-                  </div>
-                </div>
-              </div>
-        <?php
+                }
             }
-          }
-        }
-        ?>
-      </div>
+            ?>
+        </div>
     </section>
-  </div>
+</div>
+
 
   <!-- footer -->
   <?php include "../Back-end/footer.php"; ?>

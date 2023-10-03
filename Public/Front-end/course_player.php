@@ -54,6 +54,11 @@
 </head>
 <?php
 session_start();
+
+// Include the authentication check function
+include '../back-end/auth_login.php';
+
+checkLogin();
 // Include your database connection
 require '../back-end/dbconnect.php';
 

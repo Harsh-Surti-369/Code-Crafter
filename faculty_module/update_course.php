@@ -1,6 +1,10 @@
 
 <?php
 session_start();
+
+include '../public/back-end/auth_login.php';
+
+checkLogin();
 $fid = $_SESSION['fid'];
 
 require '../public/back-end/dbconnect.php';
